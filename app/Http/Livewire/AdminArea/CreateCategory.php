@@ -12,7 +12,7 @@ class CreateCategory extends Component
     protected function rules()
     {
         return [
-            'name' => 'required|min:3',
+            'name' => 'required|string',
         ];
     }
 
@@ -24,6 +24,15 @@ class CreateCategory extends Component
     public function store()
     {
         $validatedData = $this->validate();
+        Category::create($validatedData);
+        session()->flash('message', 'Data berhasil ditambahkan');
+        $this->resetInput();
+        $this->dispatchBrowserEvent('close-model');
+    }
+
+    public function resetInput()
+    {
+        $this->name = '';
     }
     
     public function render()

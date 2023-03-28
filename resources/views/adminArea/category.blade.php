@@ -6,8 +6,10 @@
 @section('content')
     <div class="row">
         <livewire:admin-area.create-category />
-        {{-- @include('livewire.admin-area.create-category') --}}
         <div class="col-12">
+            @if (session()->has('message'))
+                <h5 class="alert alert-success">{{ session('message') }}</h5>
+            @endif
             <div class="card my-4">
                 <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
                     <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
@@ -27,4 +29,11 @@
             </div>
         </div>
     </div>
+@endsection
+@section('script')
+    <script>
+        window.addEventListener('close-model', event => {
+            $('#addCategory').modal('hide');
+    })
+    </script>
 @endsection
