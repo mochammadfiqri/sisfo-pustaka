@@ -12,8 +12,10 @@ class TableCategory extends Component
     public function render()
     {
         // $this->category = Category::latest()->get();
-        return view('livewire.admin-area.table-category', [
-            'category' => Category::latest()->get()
-        ]);
+        // return view('livewire.admin-area.table-category', [
+        //     'category' => Category::latest()->get()
+        // ]);
+        $category = Category::select('name')->get();
+        return view('livewire.admin-area.table-category', ['category' => $category]);
     }
 }

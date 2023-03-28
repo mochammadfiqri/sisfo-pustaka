@@ -24,15 +24,21 @@ class CreateCategory extends Component
     public function store()
     {
         $validatedData = $this->validate();
-        Category::create($validatedData);
+        dd($validatedData);
+        // Category::create($validatedData);
         session()->flash('message', 'Data berhasil ditambahkan');
         $this->resetInput();
         $this->dispatchBrowserEvent('close-model');
     }
 
-    public function resetInput()
+    private function resetInput()
     {
         $this->name = '';
+    }
+
+    public function closeModal()
+    {
+        $this->resetInput();
     }
     
     public function render()
