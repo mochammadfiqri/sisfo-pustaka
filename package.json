@@ -37,6 +37,7 @@
         "datatables.net-staterestore-jqui": "^1.2.2",
         "install": "^0.13.0",
         "npm": "^9.6.2",
+        "sweetalert2": "^11.7.3",
         "tw-elements": "^1.0.0-beta1"
     }
 }

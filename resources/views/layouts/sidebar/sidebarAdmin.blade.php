@@ -44,21 +44,21 @@
             </li>
             <hr class="horizontal light mt-0 mb-2">
             <li class="nav-item ">
-                <a href="/dashboard" wire:click.prevent="pageDashboard" class="nav-link text-white {{ request()->routeIs('dashboard') ? 'active' : '' }}" aria-controls="dashboardsExamples"
+                <a href="/dashboard" class="nav-link text-white {{ request()->routeIs('dashboard') ? 'active' : '' }}" aria-controls="dashboardsExamples"
                     role="button" aria-expanded="false">
                     <i class="material-icons-round opacity-10">dashboard</i>
                     <span class="nav-link-text ms-2 ps-1">Dashboard</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a href="/e-catalog" wire:click.prevent="pageCatalog" class="nav-link text-white {{ request()->routeIs('catalog') ? 'active' : '' }}" aria-controls="catalogExamples"
+                <a href="/e-catalog" class="nav-link text-white {{ request()->routeIs('catalog') ? 'active' : '' }}" aria-controls="catalogExamples"
                     role="button" aria-expanded="false">
                     <i class="material-icons-round opacity-10">book</i>
                     <span class="nav-link-text ms-2 ps-1">E - Catalog</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a href="/kategori-buku" wire:click.prevent="pageCategory" class="nav-link text-white {{ request()->routeIs('kategori') ? 'active' : '' }}" aria-controls="dashboardsExamples"
+                <a href="/kategori-buku" class="nav-link text-white {{ request()->routeIs('kategori') ? 'active' : '' }}" aria-controls="dashboardsExamples"
                     role="button" aria-expanded="false">
                     <i class="material-icons-round opacity-10">category</i>
                     <span class="nav-link-text ms-2 ps-1">Kategori Buku</span>

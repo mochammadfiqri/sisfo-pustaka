@@ -8,20 +8,19 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form wire:submit.prevent="store">
-                <div class="modal-body">
+            <div class="modal-body">
+                <form wire:submit.prevent="store">
                     <div class="input-group input-group-outline my-3">
                         <label class="form-label">Masukan Kategori Baru</label>
                         <input wire:model="name" type="text" class="form-control" id="name">
                     </div>
-                    @error('name') <span class="text-danger">{{ $message }}</span> @enderror
+                    @error('name') <span class="text-danger text-sm">{{ $message }}</span> @enderror
                     <div style="float: right;" class="border-0">
                         <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Batal</button>
-                        <button type="submit" wire:click="store" wire:loading.attr="disabled"
-                            class="btn btn-success">Simpan</button>
+                        <button type="submit" wire:loading.attr="disabled" class="btn btn-success">Simpan</button>
                     </div>
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
     </div>
 </div>

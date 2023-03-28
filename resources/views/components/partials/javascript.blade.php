@@ -5,7 +5,6 @@
 <script src="{{ asset('js/plugins/smooth-scrollbar.min.js') }}"></script>
 <script src="{{ asset('js/plugins/chartjs.min.js') }}"></script>
 <script src="{{ asset('js/plugins/Chart.extension.js') }}"></script>
-{{-- <script src="{{ asset('css/datatables.css') }}"></script> --}}
 <script>
     var ctx = document.getElementById("chart-bars").getContext("2d");
 
@@ -270,23 +269,5 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8" crossorigin="anonymous"></script>
 <!-- Datatables -->
 <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
-{{-- <script src="{{ asset('js/plugins/dataTables.autoFill.min.js') }}"></script>
-<script src="{{ asset('js/plugins/dataTables.buttons.min.js') }}"></script>
-<script src="{{ asset('js/plugins/dataTables.colReorder.min.js') }}"></script>
-<script src="{{ asset('js/plugins/dataTables.dateTime.min.js') }}"></script>
-<script src="{{ asset('js/plugins/dataTables.fixedColumns.min.js') }}"></script>
-<script src="{{ asset('js/plugins/dataTables.fixedHeader.min.js') }}"></script>
-<script src="{{ asset('js/plugins/dataTables.jqueryui.min.js') }}"></script>
-<script src="{{ asset('js/plugins/dataTables.keyTable.min.js') }}"></script>
-<script src="{{ asset('js/plugins/datatables.min.js') }}"></script>
-<script src="{{ asset('js/plugins/dataTables.responsive.min.js') }}"></script>
-<script src="{{ asset('js/plugins/dataTables.rowGroup.min.js') }}"></script>
-<script src="{{ asset('js/plugins/dataTables.rowReorder.min.js') }}"></script>
-<script src="{{ asset('js/plugins/dataTables.scroller.min.js') }}"></script>
-<script src="{{ asset('js/plugins/dataTables.searchBuilder.min.js') }}"></script>
-<script src="{{ asset('js/plugins/dataTables.searchPanes.min.js') }}"></script>
-<script src="{{ asset('js/plugins/dataTables.select.min.js') }}"></script>
-<script src="{{ asset('js/plugins/autoFill.jqueryui.min.js') }}"></script>
-<script src="{{ asset('js/plugins/buttons.jqueryui.min.js') }}"></script>
-<script src="{{ asset('js/plugins/buttons.print.min.js') }}"></script>
-<script src="{{ asset('js/plugins/colReorder.jqueryui.min.js') }}"></script> --}}
+
+{{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script> --}}

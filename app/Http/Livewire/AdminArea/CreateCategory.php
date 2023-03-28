@@ -25,7 +25,7 @@ class CreateCategory extends Component
     {
         $validatedData = $this->validate();
     }
-
+    
     public function render()
     {
         return view('livewire.admin-area.create-category');

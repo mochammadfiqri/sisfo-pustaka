@@ -8,6 +8,6 @@ class ProfileController extends Controller
 {
     public function indexAdmin()
     {
-        return view('livewire.admin-area.profile.index');
+        return view('adminArea.profile');
     }
 }

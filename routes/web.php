@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BooksController;
+use App\Http\Controllers\CatalogController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MemberController;
@@ -40,12 +41,18 @@ Route::middleware('only_guest')->group(function() {
     Route::get('/website', [WebsiteController::class, 'index']);
 });
 
+// Route::group(['middleware' => ['auth']], function(){
+//     Route::get('/dashboard', Dashboard::class)->name('dashboard')->middleware('only_admin');
+//     Route::get('/e-catalog', Catalog::class)->name('catalog')->middleware('only_admin');
+//     Route::get('/kategori-buku', Category::class)->name('kategori')->middleware('only_admin');
+// });
+
 Route::middleware('auth')->group(function() {
     Route::get('/logout', [AuthController::class, 'logout']);
-    Route::get('/dashboard', Dashboard::class)->name('dashboard')->middleware('only_admin');
-    Route::get('/e-catalog', Catalog::class)->name('catalog')->middleware('only_admin');
-    Route::get('/kategori-buku', Category::class)->name('kategori')->middleware('only_admin');
-    // Route::get('/kategori-buku', [CategoryController::class, 'index'])->name('kategori')->middleware('only_admin');
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard')->middleware('only_admin');
+    Route::get('/e-catalog', [CatalogController::class, 'index'])->name('catalog')->middleware('only_admin');
+    // Route::get('/kategori-buku', Category::class)->name('kategori')->middleware('only_admin');
+    Route::get('/kategori-buku', [CategoryController::class, 'index'])->name('kategori')->middleware('only_admin');
     Route::get('/profile-admin', [ProfileController::class, 'indexAdmin'])->name('profileAdmin')->middleware('only_admin');
     Route::get('/profile-member', [ProfileController::class, 'indexMember'])->name('profileMember')->middleware('only_member');
     Route::get('/member_area', Member::class)->middleware(['only_member']);
