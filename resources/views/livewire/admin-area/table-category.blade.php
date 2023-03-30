@@ -11,11 +11,11 @@
                 <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                     Action
                 </th>
-                <th class="text-secondary opacity-7"></th>
             </tr>
         </thead>
         <tbody>
-            @foreach ($category as $data)
+            @if ($category->count() > 0)
+                @foreach ($category as $data)
                 <tr>
                     <td class="align-middle text-center">
                         <span class="text-secondary text-xs font-weight-bold text-center">{{ $loop->iteration }}</span>
@@ -28,7 +28,23 @@
                         <a href="#" class="btn btn-danger btn-sm">Hapus</a>
                     </td>
                 </tr>
-            @endforeach
+                @endforeach
+            @else
+                <tr>
+                    <td class="text-center">
+                        <span class="text-secondary text-xs font-weight-bold"> </span>
+                    </td>
+                    <td class="text-center">
+                        <span class="text-secondary text-xs font-weight-bold">Tidak ada data yang ditemukan</span>
+                    </td>
+                    <td class="text-center">
+                        <span class="text-secondary text-xs font-weight-bold"> </span>
+                    </td>
+                </tr>
+            @endif
         </tbody>
     </table>
+    <div class="float-end me-3">
+        {{ $category->links() }}
+    </div>
 </div>

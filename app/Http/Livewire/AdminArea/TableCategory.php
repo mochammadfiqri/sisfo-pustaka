@@ -7,15 +7,9 @@ use Livewire\Component;
 
 class TableCategory extends Component
 {
-    // public $category;
-
+    
     public function render()
     {
-        // $this->category = Category::latest()->get();
-        // return view('livewire.admin-area.table-category', [
-        //     'category' => Category::latest()->get()
-        // ]);
-        $category = Category::select('name')->get();
-        return view('livewire.admin-area.table-category', ['category' => $category]);
+        return view('livewire.admin-area.table-category');
     }
 }
