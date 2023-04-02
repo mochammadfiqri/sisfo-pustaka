@@ -86,7 +86,6 @@
         },
     });
 
-
     var ctx2 = document.getElementById("chart-line").getContext("2d");
 
     new Chart(ctx2, {
@@ -266,8 +265,8 @@
 
 <!-- Github buttons -->
 <script async defer src="https://buttons.github.io/buttons.js"></script>
-<!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
-{{-- <script src="{{ asset('js/material-dashboard.min.js') }}"></script> --}}
+<!-- Control Center for Material Dashboard: parallax effects, scripts -->
+<script src="{{ asset('js/material-dashboard.min.js') }}"></script>
 <!-- JavaScript Bundle with Popper -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8" crossorigin="anonymous"></script>
 <!-- Datatables -->

@@ -31,6 +31,8 @@
 
             window.addEventListener('close-modal', event => {
                 $('#addCategory').modal('hide');
+                $('#updateCategory').modal('hide');
+                $('#deleteCategory').modal('hide');
                 toastr.success(event.detail.message);
             })
         });

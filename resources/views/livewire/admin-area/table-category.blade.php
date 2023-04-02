@@ -24,8 +24,8 @@
                         <span class="text-secondary text-xs font-weight-bold text-center">{{ $data->name }}</span>
                     </td>
                     <td class="align-middle text-center">
-                        <a href="#" class="btn btn-info btn-sm">Edit</a>
-                        <a href="#" class="btn btn-danger btn-sm">Hapus</a>
+                        <button type="button" data-bs-toggle="modal" data-bs-target="#updateCategory" wire:click='editCategory({{ $data->id }})' class="btn btn-info btn-sm">Edit</button>
+                        <button type="button" data-bs-toggle="modal" data-bs-target="#deleteCategory" wire:click='deleteCategory({{ $data->id }})' class="btn btn-danger btn-sm">Hapus</button>
                     </td>
                 </tr>
                 @endforeach

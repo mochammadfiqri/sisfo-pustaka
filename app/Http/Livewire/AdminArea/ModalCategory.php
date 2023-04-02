@@ -10,6 +10,6 @@ class CreateCategory extends Component
     
     public function render()
     {
-        return view('livewire.admin-area.create-category');
+        return view('livewire.admin-area.modal-category');
     }
 }

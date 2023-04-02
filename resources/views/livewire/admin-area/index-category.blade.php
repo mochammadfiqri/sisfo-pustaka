@@ -1,8 +1,8 @@
 <div class="row">
     {{-- <livewire:admin-area.create-category /> --}}
-    @include('livewire.admin-area.create-category')
+    @include('livewire.admin-area.modal-category')
     <div class="col-12">
-        <div class="card my-4">
+        <div class="card my-2">
             <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
                 <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
                     <h6 class="text-white text-uppercase ps-3">
@@ -13,7 +13,15 @@
                     </h6>
                 </div>
             </div>
+            
             <div class="card-body px-0 pb-2">
+                <div class="ms-4">
+                    <select wire:model='paginate' class="btn btn-sm btn-outline-primary w-auto" type="button">
+                        <option value="5">5</option>
+                        <option value="10">10</option>
+                        <option value="15">15</option>
+                    </select>
+                </div>
                 <div class="table-responsive p-0">
                     {{-- <livewire:admin-area.table-category /> --}}
                     @include('livewire.admin-area.table-category')

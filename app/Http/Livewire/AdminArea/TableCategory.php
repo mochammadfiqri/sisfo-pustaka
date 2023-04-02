@@ -7,7 +7,6 @@ use Livewire\Component;
 
 class TableCategory extends Component
 {
-    
     public function render()
     {
         return view('livewire.admin-area.table-category');
