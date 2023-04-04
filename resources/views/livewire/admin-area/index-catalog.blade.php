@@ -1,14 +1,14 @@
 <div class="row">
-    @include('livewire.admin-area.modal-category')
+    @include('livewire.admin-area.modal-catalog')
     <div class="col-12">
         <div class="card my-2">
             <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
                 <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
                     <h6 class="text-white text-uppercase ps-3">
-                        Kategori Buku
+                        Daftar Buku
                         <!-- Button trigger modal -->
                         <button type="button" class="btn bg-gradient-success btn-sm float-end" data-bs-toggle="modal"
-                            data-bs-target="#addCategory">Tambah Kategori</button>
+                            data-bs-target="#addBooks">Tambah Buku</button>
                     </h6>
                 </div>
             </div>
@@ -26,7 +26,7 @@
                     </div>
                 </div>
                 <div class="table-responsive p-0">
-                    @include('livewire.admin-area.table-category')
+                    @include('livewire.admin-area.table-catalog')
                 </div>
             </div>
         </div>

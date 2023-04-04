@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Category')
+@section('title', 'SISFO-PUSTAKA | Profile')
 @section('navbar1', 'Category')
 @section('navbar2', 'Category')
 

@@ -25,13 +25,13 @@ use App\Http\Livewire\MemberArea\Member;
 |
 */
 
-// Route::get('/', function () {
-//     return redirect('/dashboard');
-// });
-
 Route::get('/', function () {
-    return view('livewire.auth.login');
+    return redirect('/login');
 });
+
+// Route::get('/', function () {
+//     return view('livewire.auth.login');
+// });
 
 Route::middleware('only_guest')->group(function() {
     Route::get('login', [AuthController::class, 'login'])->name('login');

@@ -7,7 +7,7 @@
     <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('img/apple-icon.png') }}">
     <link rel="icon" type="image/png" href="{{ asset('img/favicon.png') }}">
     <title>SISFO-PUSTAKA | Login</title>
-    @include('component.stylesheet')
+    @include('components.partials.stylesheet')
 </head>
 
 <body class="">
@@ -81,7 +81,7 @@
             </div>
         </section>
     </main>
-    @include('component.javascript')
+    @include('components.partials.javascript')
 </body>
 
 </html>

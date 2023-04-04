@@ -13,6 +13,7 @@ class IndexCategory extends Component
     protected $paginationTheme = 'bootstrap';
     public $name, $category_id;
     public $paginate = 5;
+    public $search;
 
     protected function rules()
     {
@@ -81,7 +82,9 @@ class IndexCategory extends Component
     public function render()
     {
         return view('livewire.admin-area.index-category', [
-            'category' => Category::latest()->paginate($this->paginate),
+            'category' => $this->search === null ?
+                Category::latest()->paginate($this->paginate) :
+                Category::latest()->where('name', 'like', '%' . $this->search . '%')->paginate($this->paginate)
         ]);
     }
 }

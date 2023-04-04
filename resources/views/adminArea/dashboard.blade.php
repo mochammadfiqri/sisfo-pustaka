@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Dashboard')
+@section('title', 'SISFO-PUSTAKA | Dashboard')
 @section('navbar1', 'Dashboard')
 @section('navbar2', 'Dashboard')
 
