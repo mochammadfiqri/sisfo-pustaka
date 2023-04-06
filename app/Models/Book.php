@@ -13,10 +13,9 @@ class Book extends Model
     protected $fillable = [
         'kode_buku',
         'judul',
-        // 'cover',
+        'cover',
         'jilid',
         'cetakan',
-        'volume',
         'edisi',
         'kata_kunci',
         'bahasa',
@@ -27,6 +26,7 @@ class Book extends Model
         'penerbit',
         'pengarang',
         'abstrak',
+        'url',
         'file',
         'status',
     ];

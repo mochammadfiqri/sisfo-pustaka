@@ -28,9 +28,6 @@
                 <td class="align-middle text-center">
                     {{-- <span class="text-secondary text-xs font-weight-bold text-center">{{ $data->judul }}</span> --}}
                     <div class="d-flex px-6 py-1m ms-5">
-                        <div>
-                            <img src="{{ asset('img/team-2.jpg') }}" class="avatar avatar-sm me-3 border-radius-lg" alt="user1">
-                        </div>
                         <div class="d-flex flex-column justify-content-center">
                             <h6 class="mb-0 text-sm">{{ $data->judul }}</h6>
                             <p class="text-xs text-secondary text-start mb-0">{{ $data->pengarang }}</p>
@@ -41,10 +38,12 @@
                     <span class="badge bg-gradient-success ms-2">{{ $data->status }}</span>
                 </td>
                 <td class="align-middle text-center">
-                    <button type="button" data-bs-toggle="modal" data-bs-target="#updateCategory"
-                        wire:click='editBooks({{ $data->id }})' class="btn btn-info btn-sm mt-3">Edit</button>
+                    <button type="button" data-bs-toggle="modal" data-bs-target="#updateBooks"
+                        wire:click='editBooks({{ $data->id }})' class="btn btn-info btn-sm mt-3 ms-4">Edit</button>
                     <button type="button" data-bs-toggle="modal" data-bs-target="#deleteBooks"
                         wire:click='deleteBooks({{ $data->id }})' class="btn btn-danger btn-sm mt-3">Hapus</button>
+                    {{-- <button type="button" wire:click='detailBooks({{ $data->id }})' class="btn btn-primary btn-sm mt-3">Details</button> --}}
+                    <a href="e-catalog/detail/{{ $data->id }}" type="button" class="btn btn-primary btn-sm mt-3">Detail</a>
                 </td>
             </tr>
             @endforeach

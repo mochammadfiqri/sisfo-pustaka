@@ -16,3 +16,5 @@
 <link href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.css">
 <!-- Toastr -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"/>
+<!-- AlpineJS -->
+<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
