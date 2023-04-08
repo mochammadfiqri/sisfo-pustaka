@@ -39,7 +39,6 @@ Route::middleware('auth')->group(function() {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard')->middleware('only_admin');
     Route::get('/e-catalog', [CatalogController::class, 'index'])->name('catalog')->middleware('only_admin');
     Route::get('/e-catalog/detail/{id}', [CatalogController::class, 'show'])->name('show')->middleware('only_admin');
-    // Route::get('/detail/{id}', IndexDetail::class)->name('detail')->middleware('only_admin');
     Route::get('/kategori-buku', [CategoryController::class, 'index'])->name('kategori')->middleware('only_admin');
     Route::get('/profile-admin', [ProfileController::class, 'indexAdmin'])->name('profileAdmin')->middleware('only_admin');
     Route::get('/profile-member', [ProfileController::class, 'indexMember'])->name('profileMember')->middleware('only_member');
