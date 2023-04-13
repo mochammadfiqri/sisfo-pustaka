@@ -13,7 +13,12 @@
             <div class="row">
                 <div class="col-12 col-md-4 col-lg-3">
                     <div class="h-100">
-                        <img src="{{ asset('img/cover_buku.jpg') }}" class="w-100 border-radius-lg shadow-sm">
+                        @if ($books->cover !== null)
+                            <img src="{{ asset('storage/'.$books->cover) }}" class="w-100 border-radius-lg shadow-sm">
+                            {{-- <img src="{{ Storage::url($books->cover) }}" class="w-100 border-radius-lg shadow-sm"> --}}
+                        @else
+                            <img src="{{ asset('img/cover-not-found.jpg') }}" class="w-100 border-radius-lg shadow-sm">
+                        @endif
                     </div>
                 </div>
                 <div class="col-12 col-md-5 col-lg-6 d-flex align-items-top justify-content-top">

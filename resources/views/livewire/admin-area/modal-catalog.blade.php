@@ -36,7 +36,7 @@
                             placeholder="Masukan ISBN / ISSN">
                     </div>
                     <div class="input-group input-group-outline my-3">
-                        <input wire:model="halaman" type="text" class="form-control" name="halaman" id="halaman"
+                        <input wire:model="halaman" type="number" class="form-control" name="halaman" id="halaman"
                             placeholder="Masukan Halaman">
                     </div>
                     <div class="input-group input-group-outline my-3">
@@ -62,13 +62,13 @@
                         <input wire:model="url" type="text" class="form-control" name="url" id="url"
                             placeholder="Contoh: https://www.google.com">
                     </div>
-                    <div class="input-group input-group-outline my-3">
+                    {{-- <div class="input-group input-group-outline my-3">
                         <select wire:model='status' class="form-control">
                             <option selected>Pilih Status...</option>
                             <option value="in stock">in stock</option>
                             <option value="out stock">out stock</option>
                         </select>
-                    </div>
+                    </div> --}}
                     <label class="text-sm mb-0" for="cover">Pilih File</label>
                     <div class="input-group input-group-outline my-1">
                         <input wire:model="file" type="file" class="form-control" name="file">
@@ -175,13 +175,13 @@
                         <input wire:model="url" type="text" class="form-control" name="url" id="url"
                             placeholder="Contoh: https://www.google.com">
                     </div>
-                    <div class="input-group input-group-outline my-3">
+                    {{-- <div class="input-group input-group-outline my-3">
                         <select wire:model='status' class="form-control">
                             <option selected>Pilih Status...</option>
                             <option value="in stock">in stock</option>
                             <option value="out stock">out stock</option>
                         </select>
-                    </div>
+                    </div> --}}
                     <label class="text-sm mb-0" for="cover">Pilih File</label>
                     <div class="input-group input-group-outline my-1">
                         <input wire:model="file" type="file" class="form-control" name="file">
@@ -202,7 +202,7 @@
                     </div>
                     @error('cover') <span class="text-danger text-xs font-weight-light">{{ $message }}</span> @enderror
                     @if ($cover)
-                    <img src="{{ $cover->temporaryUrl() }}" class="w-50 p-4">
+                        <img src="{{ $cover->temporaryUrl() }}" class="w-50 p-4">
                     @endif
                     <div style="float: right;" class="border-0 mt-3">
                         <button type="button" class="btn btn-primary" wire:click="closeModal"

@@ -28,6 +28,5 @@ class Book extends Model
         'abstrak',
         'url',
         'file',
-        'status',
     ];
 }
