@@ -19,4 +19,10 @@ class CatalogController extends Controller
             'books' => $book
         ]);
     }
+
+    // public function add()
+    // {
+    //     $kategori = Category::all();
+    //     return view('adminArea.catalog', ['kategori' => $kategori]);
+    // }
 }

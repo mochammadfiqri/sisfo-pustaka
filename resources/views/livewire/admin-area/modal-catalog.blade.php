@@ -19,6 +19,13 @@
                         <input wire:model="judul" type="text" class="form-control" name="judul" id="judul" placeholder="Masukan Judul">
                     </div>
                     @error('judul') <span class="text-danger text-xs font-weight-light">{{ $message }}</span> @enderror
+                    <div wire:ignore class="input-group input-group-outline my-3">
+                        <select name="categories[]" id="" wire:model='categories' data-placeholder="Pilih Kategori..." multiple>
+                            @foreach ($kategori as $item)
+                                <option value="{{ $item->id }}">{{ $item->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
                     <div class="input-group input-group-outline mt-3">
                         <input wire:model="jilid" type="text" class="form-control" name="jilid" id="jilid" placeholder="Masukan Jilid">
                     </div>
@@ -30,6 +37,10 @@
                     </div>
                     <div class="input-group input-group-outline my-3">
                         <input wire:model="kata_kunci" type="text" class="form-control" name="kata_kunci" id="kata_kunci" placeholder="Masukan Kata Kunci">
+                    </div>
+                    <div class="input-group input-group-outline my-3">
+                        <input wire:model="bahasa" type="text" class="form-control" name="bahasa" id="bahasa"
+                            placeholder="Masukan bahasa">
                     </div>
                     <div class="input-group input-group-outline my-3">
                         <input wire:model="isbn_issn" type="number" class="form-control" name="isbn_issn" id="isbn_issn"
@@ -62,13 +73,6 @@
                         <input wire:model="url" type="text" class="form-control" name="url" id="url"
                             placeholder="Contoh: https://www.google.com">
                     </div>
-                    {{-- <div class="input-group input-group-outline my-3">
-                        <select wire:model='status' class="form-control">
-                            <option selected>Pilih Status...</option>
-                            <option value="in stock">in stock</option>
-                            <option value="out stock">out stock</option>
-                        </select>
-                    </div> --}}
                     <label class="text-sm mb-0" for="cover">Pilih File</label>
                     <div class="input-group input-group-outline my-1">
                         <input wire:model="file" type="file" class="form-control" name="file">
@@ -89,9 +93,9 @@
                         </div>
                     </div>
                     @error('cover') <span class="text-danger text-xs font-weight-light">{{ $message }}</span> @enderror
-                    @if ($cover)
+                    {{-- @if ($cover)
                         <img src="{{ $cover->temporaryUrl() }}" class="w-50 p-4">
-                    @endif
+                    @endif --}}
                     <div style="float: right;" class="border-0 mt-3">
                         <button type="button" class="btn btn-primary" wire:click="closeModal"
                             data-bs-dismiss="modal">Batal</button>
@@ -144,6 +148,9 @@
                             id="kata_kunci" placeholder="Masukan Kata Kunci">
                     </div>
                     <div class="input-group input-group-outline my-3">
+                        <input wire:model="bahasa" type="text" class="form-control" name="bahasa" id="bahasa" placeholder="Masukan bahasa">
+                    </div>
+                    <div class="input-group input-group-outline my-3">
                         <input wire:model="isbn_issn" type="number" class="form-control" name="isbn_issn" id="isbn_issn"
                             placeholder="Masukan ISBN / ISSN">
                     </div>
@@ -175,13 +182,6 @@
                         <input wire:model="url" type="text" class="form-control" name="url" id="url"
                             placeholder="Contoh: https://www.google.com">
                     </div>
-                    {{-- <div class="input-group input-group-outline my-3">
-                        <select wire:model='status' class="form-control">
-                            <option selected>Pilih Status...</option>
-                            <option value="in stock">in stock</option>
-                            <option value="out stock">out stock</option>
-                        </select>
-                    </div> --}}
                     <label class="text-sm mb-0" for="cover">Pilih File</label>
                     <div class="input-group input-group-outline my-1">
                         <input wire:model="file" type="file" class="form-control" name="file">
@@ -201,9 +201,9 @@
                         </div>
                     </div>
                     @error('cover') <span class="text-danger text-xs font-weight-light">{{ $message }}</span> @enderror
-                    @if ($cover)
+                    {{-- @if ($cover)
                         <img src="{{ $cover->temporaryUrl() }}" class="w-50 p-4">
-                    @endif
+                    @endif --}}
                     <div style="float: right;" class="border-0 mt-3">
                         <button type="button" class="btn btn-primary" wire:click="closeModal"
                             data-bs-dismiss="modal">Batal</button>

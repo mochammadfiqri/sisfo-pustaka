@@ -4,6 +4,7 @@
 <head>
     <x-partials.head />
     @livewireStyles
+    @stack('addonsStyle')
 </head>
 
 <body class="g-sidenav-show bg-gray-200">
@@ -38,6 +39,6 @@
     <!--   JS Files   -->
     @include('components.partials.javascript')
     @livewireScripts
-    @yield('script')
+    @stack('addonsScript')
 </body>
 </html>

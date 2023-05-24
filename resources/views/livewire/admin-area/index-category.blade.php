@@ -14,12 +14,12 @@
             </div>
             <div class="card-body px-0 pb-2">
                 <div class="col ms-4">
-                    <select wire:model='paginate' class="btn btn-sm btn-outline-primary w-auto" type="button">
+                    <select wire:model='paginate' class="btn btn-sm btn-outline-secondary" type="button">
                         <option value="5">5</option>
                         <option value="10">10</option>
                         <option value="15">15</option>
                     </select>
-                    <div class="col float-end me-3">
+                    <div class="col col-md-3 float-end me-3">
                         <div class="input-group input-group-outline">
                             <input wire:model="search" type="text" class="form-control" placeholder="Cari...">
                         </div>

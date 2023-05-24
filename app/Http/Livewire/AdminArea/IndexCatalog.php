@@ -4,6 +4,7 @@ namespace App\Http\Livewire\AdminArea;
 
 use App\Models\Book;
 use Livewire\Component;
+use App\Models\Category;
 use Livewire\WithPagination;
 use Livewire\WithFileUploads;
 use Illuminate\Validation\Rule;
@@ -15,7 +16,7 @@ class IndexCatalog extends Component
     protected $paginationTheme = 'bootstrap';
     public $kode_buku, $judul, $cover, $jilid, $cetakan, $edisi, $kata_kunci, $bahasa, $isbn_issn,
         $halaman, $tahun_terbit, $kota_terbit, $penerbit, $pengarang, $abstrak, $url, $file, $books_id;
-    // public $status = 'in stock';
+    public $categories = [];
     public $paginate = 5;
     public $search;
 
@@ -42,56 +43,14 @@ class IndexCatalog extends Component
         ];
     }
 
-    // protected $rules = [
-    //     'kode_buku' => 'required|unique:books,kode_buku,' . $this->books_id,
-    //     'judul' => 'required',
-    //     'jilid' => 'nullable',
-    //     'cetakan' => 'nullable',
-    //     'edisi' => 'nullable',
-    //     'kata_kunci' => 'nullable',
-    //     'bahasa' => 'nullable',
-    //     'isbn_issn' => 'nullable|numeric',
-    //     'halaman' => 'nullable|numeric',
-    //     'tahun_terbit' => 'nullable|numeric',
-    //     'kota_terbit' => 'nullable',
-    //     'penerbit' => 'nullable',
-    //     'pengarang' => 'nullable',
-    //     'abstrak' => 'nullable',
-    //     'url' => 'nullable',
-    //     'cover' => 'nullable|image|max:1024',
-    //     'file' => 'nullable|file|max:2048'    
-    // ];
-
     public function updated($fields)
     {
         $this->validateOnly($fields);
     }
 
-    // public function createBooks()
-    // {
-    //     $newName = '';
-
-    //     if ($this->cover) {
-    //         $extension = $this->cover->getClientOriginalExtension();
-    //         $newName = $this->judul.'-'.now()->timestamp.'.'.$extension;
-    //         $this->cover->storeAS('cover', $newName);
-    //     }
-
-    //     if ($this->file !== null) { //menambahkan pengecekan apakah input file tidak bernilai null
-    //     $this->file->store('public/files');
-    //     }
-
-    //     $this->cover = $newName;
-
-    //     $validatedData = $this->validate();
-    //     Book::create($validatedData);
-     
-    //     $this->resetInput();
-    //     $this->dispatchBrowserEvent('close-modal', ['message' => 'Buku berhasil ditambahkan!']);
-    // }
-
     public function createBooks()
     {
+        dd($this->all());
         $this->validate();
         $pathCover = null;
         $pathFile  = null;
@@ -106,25 +65,26 @@ class IndexCatalog extends Component
             $pathCover = $this->cover->storeAs($newName);
         }
 
-        $fileData               = new Book;
-        $fileData->kode_buku    = $this->kode_buku;
-        $fileData->judul        = $this->judul;
-        $fileData->jilid        = $this->jilid;
-        $fileData->cetakan      = $this->cetakan;
-        $fileData->edisi        = $this->edisi;
-        $fileData->kata_kunci   = $this->kata_kunci;
-        $fileData->bahasa       = $this->bahasa;
-        $fileData->isbn_issn    = $this->isbn_issn;
-        $fileData->halaman      = $this->halaman;
-        $fileData->tahun_terbit = $this->tahun_terbit;
-        $fileData->kota_terbit  = $this->kota_terbit;
-        $fileData->penerbit     = $this->penerbit;
-        $fileData->pengarang    = $this->pengarang;
-        $fileData->abstrak      = $this->abstrak;
-        $fileData->url          = $this->url;
-        $fileData->file         = $pathFile;
-        $fileData->cover        = $pathCover;
-        $fileData->save();
+        $book = Book::create([
+        'kode_buku'    => $this->kode_buku,
+        'judul'        => $this->judul,
+        'jilid'        => $this->jilid,
+        'cetakan'      => $this->cetakan,
+        'edisi'        => $this->edisi,
+        'kata_kunci'   => $this->kata_kunci,
+        'bahasa'       => $this->bahasa,
+        'isbn_issn'    => $this->isbn_issn,
+        'halaman'      => $this->halaman,
+        'tahun_terbit' => $this->tahun_terbit,
+        'kota_terbit'  => $this->kota_terbit,
+        'penerbit'     => $this->penerbit,
+        'pengarang'    => $this->pengarang,
+        'abstrak'      => $this->abstrak,
+        'url'          => $this->url,
+        'file'         => $pathFile,
+        'cover'        => $pathCover,
+        ]);
+        $book->categories()->sync($this->categories);
 
         $this->resetInput();
         $this->dispatchBrowserEvent('close-modal', ['message' => 'Buku berhasil ditambahkan!']);
@@ -224,10 +184,15 @@ class IndexCatalog extends Component
 
     public function render()
     {
-        return view('livewire.admin-area.index-catalog', [
-            'books' => $this->search === null ?
+        $books = $this->search === null ?
             Book::latest()->paginate($this->paginate) :
-            Book::latest()->where('judul', 'like', '%' . $this->search . '%')->paginate($this->paginate)
+            Book::latest()->where('judul', 'like', '%' . $this->search . '%')->paginate($this->paginate);
+        
+        $kategori = Category::all();
+        
+        return view('livewire.admin-area.index-catalog', [
+            'books' => $books,
+            'kategori' => $kategori
         ]);
     }
 }

@@ -12,7 +12,6 @@
                     Status</th>
                 <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                     Action</th>
-                {{-- <th class="text-secondary opacity-7"></th> --}}
             </tr>
         </thead>
         <tbody>
@@ -26,7 +25,6 @@
                     <span class="text-secondary text-xs font-weight-bold text-center me-3">{{ $data->kode_buku }}</span>
                 </td>
                 <td class="align-middle text-center">
-                    {{-- <span class="text-secondary text-xs font-weight-bold text-center">{{ $data->judul }}</span> --}}
                     <div class="d-flex px-6 py-1m ms-5">
                         <div class="d-flex flex-column justify-content-center">
                             <h6 class="mb-0 text-sm">{{ $data->judul }}</h6>
@@ -42,7 +40,6 @@
                         wire:click='editBooks({{ $data->id }})' class="btn btn-info btn-sm mt-3 ms-4">Edit</button>
                     <button type="button" data-bs-toggle="modal" data-bs-target="#deleteBooks"
                         wire:click='deleteBooks({{ $data->id }})' class="btn btn-danger btn-sm mt-3">Hapus</button>
-                    {{-- <button type="button" wire:click='detailBooks({{ $data->id }})' class="btn btn-primary btn-sm mt-3">Details</button> --}}
                     <a href="e-catalog/detail/{{ $data->id }}" type="button" class="btn btn-primary btn-sm mt-3">Detail</a>
                 </td>
             </tr>
