@@ -19,14 +19,16 @@
                         <input wire:model="judul" type="text" class="form-control" name="judul" id="judul" placeholder="Masukan Judul">
                     </div>
                     @error('judul') <span class="text-danger text-xs font-weight-light">{{ $message }}</span> @enderror
-                    <div wire:ignore class="input-group input-group-outline my-3">
-                        <select name="categories[]" id="" wire:model='categories' data-placeholder="Pilih Kategori..." multiple>
+                    <div wire:ignore class="input-group input-group-outline mt-3">
+                        <select name="categories[]" id="select-multiple" wire:model='categories' data-placeholder="Pilih Kategori..." class="form-control" multiple="multiple">
                             @foreach ($kategori as $item)
                                 <option value="{{ $item->id }}">{{ $item->name }}</option>
                             @endforeach
                         </select>
                     </div>
-                    <div class="input-group input-group-outline mt-3">
+                    <label class="text-xs my-sm-0 text-red-600" for="select-category">* Tekan CTRL untuk memilih lebih dari 1
+                        kategori</label>
+                    <div class="input-group input-group-outline mt-2">
                         <input wire:model="jilid" type="text" class="form-control" name="jilid" id="jilid" placeholder="Masukan Jilid">
                     </div>
                     <div class="input-group input-group-outline my-3">
@@ -113,7 +115,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title font-weight-normal" id="updateBooksLabel">Edit Buku</h5>
+                <h5 class="modal-title font-weight-normzal" id="updateBooksLabel">Edit Buku</h5>
                 <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -131,6 +133,25 @@
                             placeholder="Masukan Judul">
                     </div>
                     @error('judul') <span class="text-danger text-xs font-weight-light">{{ $message }}</span> @enderror
+                    <div wire:ignore class="input-group input-group-outline mt-3">
+                        <select name="categories[]" id="select-multiple" wire:model='categories' data-placeholder="Pilih Kategori..." class="form-control" multiple="multiple">
+                            @foreach ($kategori as $item)
+                                <option value="{{ $item->id }}">{{ $item->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <label class="text-xs my-sm-0 text-red-600" for="select-category">* Tekan CTRL untuk memilih lebih dari 1 kategori</label>
+                    <div class="dropdown">
+                        <button class="btn bg-gradient-primary btn-sm float-start dropdown-toggle mb-2" type="button" id="dropdownMenuButton"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Kategori Sebelumnya
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            @foreach ($books->pluck('categories')->flatten() as $currentCategory)
+                                <li class="dropdown-item">{{ $currentCategory->name }}</a></li>
+                            @endforeach
+                        </ul>
+                    </div>
                     <div class="input-group input-group-outline mt-3">
                         <input wire:model="jilid" type="text" class="form-control" name="jilid" id="jilid"
                             placeholder="Masukan Jilid">
@@ -201,11 +222,21 @@
                         </div>
                     </div>
                     @error('cover') <span class="text-danger text-xs font-weight-light">{{ $message }}</span> @enderror
-                    {{-- @if ($cover)
-                        <img src="{{ $cover->temporaryUrl() }}" class="w-50 p-4">
-                    @endif --}}
+                    <label class="text-sm mb-0 my-2" for="cover">Cover Buku :</label><br>
+                    <div class="w-25 border-radius-sm shadow-sm">
+                        {{-- @if ($books->cover != '')
+                        <img src="{{ asset('storage/'.$books->cover) }}" class="w-100 border-radius-lg shadow-sm">
+                        @else
+                        <img src="{{ asset('img/cover-not-found.jpg') }}" class="w-100 border-radius-lg shadow-sm">
+                        @endif --}}
+                        @if (isset($books->cover) && $books->cover != '')
+                            <img src="{{ asset('storage/'.$books->cover) }}" width="150px">
+                        @else
+                            <img src="{{ asset('img/cover-not-found.jpg') }}" width="120px">
+                        @endif
+                    </div>
                     <div style="float: right;" class="border-0 mt-3">
-                        <button type="button" class="btn btn-primary" wire:click="closeModal"
+                        <button type="button" class="btn btn-danger" wire:click="closeModal"
                             data-bs-dismiss="modal">Batal</button>
                         <button type="submit" class="btn btn-success">Simpan</button>
                     </div>

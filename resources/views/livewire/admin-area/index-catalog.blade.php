@@ -8,7 +8,7 @@
                         Daftar Buku
                         <!-- Button trigger modal -->
                         <button type="button" class="btn bg-gradient-success btn-sm float-end" data-bs-toggle="modal"
-                            data-bs-target="#addBooks">Tambah Buku</button>
+                            data-bs-target="#addBooks" data-te-ripple-init data-te-ripple-color="light">Tambah Buku</button>
                     </h6>
                 </div>
             </div>

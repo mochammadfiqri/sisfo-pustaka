@@ -16,6 +16,7 @@ class IndexCatalog extends Component
     protected $paginationTheme = 'bootstrap';
     public $kode_buku, $judul, $cover, $jilid, $cetakan, $edisi, $kata_kunci, $bahasa, $isbn_issn,
         $halaman, $tahun_terbit, $kota_terbit, $penerbit, $pengarang, $abstrak, $url, $file, $books_id;
+    public $currentCategories;
     public $categories = [];
     public $paginate = 5;
     public $search;
@@ -50,7 +51,7 @@ class IndexCatalog extends Component
 
     public function createBooks()
     {
-        dd($this->all());
+        // dd($this->all());
         $this->validate();
         $pathCover = null;
         $pathFile  = null;
@@ -90,11 +91,82 @@ class IndexCatalog extends Component
         $this->dispatchBrowserEvent('close-modal', ['message' => 'Buku berhasil ditambahkan!']);
     }
 
+    // public function updateBooks()
+    // {
+    //     if ($this->file !== null) {
+    //         $newName  = now()->timestamp . '_' . $this->file->getClientOriginalName();
+    //         $pathFile = $this->file->storeAs($newName);
+    //     }
+
+    //     if ($this->cover !== null) {
+    //         $newName   = now()->timestamp . '_' . $this->cover->getClientOriginalName();
+    //         $pathCover = $this->cover->storeAs($newName);
+    //     }
+
+    //     $validatedData = $this->validate();
+    //     $book = Book::where('id', $this->books_id)->update([
+    //         'kode_buku' => $validatedData['kode_buku'],
+    //         'judul' => $validatedData['judul'],
+    //         'jilid' => $validatedData['jilid'],
+    //         'cetakan' => $validatedData['cetakan'],
+    //         'edisi' => $validatedData['edisi'],
+    //         'kata_kunci' => $validatedData['kata_kunci'],
+    //         'bahasa' => $validatedData['bahasa'],
+    //         'isbn_issn' => $validatedData['isbn_issn'],
+    //         'halaman' => $validatedData['halaman'],
+    //         'tahun_terbit' => $validatedData['tahun_terbit'],
+    //         'kota_terbit' => $validatedData['kota_terbit'],
+    //         'penerbit' => $validatedData['penerbit'],
+    //         'pengarang' => $validatedData['pengarang'],
+    //         'abstrak' => $validatedData['abstrak'],
+    //         'url' => $validatedData['url'],
+    //         $pathCover => $validatedData['cover'],
+    //         $pathFile => $validatedData['file']
+    //     ]);
+
+    //     if ($this->categories) {
+    //         $book->categories()->sync($this->categories);
+    //     }
+    //     $this->resetInput();
+    //     $this->dispatchBrowserEvent('close-modal', ['message' => 'Buku berhasil diupdate!']);
+    // }
+
     public function updateBooks()
     {
-        $validatedData = $this->validate();
+        dd($this->all());
+        $pathCover = null;
+        $pathFile  = null;
 
-        Book::where('id', $this->books_id)->update([
+        if ($this->file !== null && $this->file instanceof \Illuminate\Http\UploadedFile ) {
+            $newName  = now()->timestamp . '_' . $this->file->getClientOriginalName();
+            $pathFile = $this->file->storeAs('', $newName);
+        }
+
+        if ($this->cover !== null && $this->cover instanceof \Illuminate\Http\UploadedFile ) {
+            $newName   = now()->timestamp . '_' . $this->cover->getClientOriginalName();
+            $pathCover = $this->cover->storeAs('', $newName);
+        }
+
+        $validatedData = $this->validate([
+            'kode_buku' => 'required',
+            'judul' => 'required',
+            'jilid' => 'required',
+            'cetakan' => 'required',
+            'edisi' => 'required',
+            'kata_kunci' => 'required',
+            'bahasa' => 'required',
+            'isbn_issn' => 'required',
+            'halaman' => 'required',
+            'tahun_terbit' => 'required',
+            'kota_terbit' => 'required',
+            'penerbit' => 'required',
+            'pengarang' => 'required',
+            'abstrak' => 'required',
+            'url' => 'required',
+        ]);
+
+        $book = Book::findOrFail($this->books_id);
+        $book->update([
             'kode_buku' => $validatedData['kode_buku'],
             'judul' => $validatedData['judul'],
             'jilid' => $validatedData['jilid'],
@@ -110,38 +182,54 @@ class IndexCatalog extends Component
             'pengarang' => $validatedData['pengarang'],
             'abstrak' => $validatedData['abstrak'],
             'url' => $validatedData['url'],
-            'cover' => $validatedData['cover'],
-            'file' => $validatedData['file']
+            'cover' => $pathCover ?? $book->cover,
+            'file' => $pathFile ?? $book->file,
         ]);
+
+        if ($this->categories) {
+            $book->categories()->sync($this->categories);
+        }
+
         $this->resetInput();
         $this->dispatchBrowserEvent('close-modal', ['message' => 'Buku berhasil diupdate!']);
     }
 
+
     public function editBooks(int $books_id)
     {
-        $books = Book::find($books_id);
-        if ($books) {
-            $this->books_id     = $books->id;
-            $this->kode_buku    = $books->kode_buku;
-            $this->judul        = $books->judul;
-            $this->cover        = $books->cover;
-            $this->jilid        = $books->jilid;
-            $this->cetakan      = $books->cetakan;
-            $this->edisi        = $books->edisi;
-            $this->kata_kunci   = $books->kata_kunci;
-            $this->bahasa       = $books->bahasa;
-            $this->isbn_issn    = $books->isbn_issn;
-            $this->halaman      = $books->halaman;
-            $this->tahun_terbit = $books->tahun_terbit;
-            $this->kota_terbit  = $books->kota_terbit;
-            $this->penerbit     = $books->penerbit;
-            $this->pengarang    = $books->pengarang;
-            $this->abstrak      = $books->abstrak;
-            $this->url          = $books->url;
-            $this->file         = $books->file;
+        
+        // $books = Book::find($books_id);
+        $editBooks = Book::find($books_id);
+        if ($editBooks) {
+            $this->books_id     = $editBooks->id;
+            $this->kode_buku    = $editBooks->kode_buku;
+            $this->judul        = $editBooks->judul;
+            $this->cover        = $editBooks->cover;
+            $this->jilid        = $editBooks->jilid;
+            $this->cetakan      = $editBooks->cetakan;
+            $this->edisi        = $editBooks->edisi;
+            $this->kata_kunci   = $editBooks->kata_kunci;
+            $this->bahasa       = $editBooks->bahasa;
+            $this->isbn_issn    = $editBooks->isbn_issn;
+            $this->halaman      = $editBooks->halaman;
+            $this->tahun_terbit = $editBooks->tahun_terbit;
+            $this->kota_terbit  = $editBooks->kota_terbit;
+            $this->penerbit     = $editBooks->penerbit;
+            $this->pengarang    = $editBooks->pengarang;
+            $this->abstrak      = $editBooks->abstrak;
+            $this->url          = $editBooks->url;
+            $this->file         = $editBooks->file;
+
+            // if ($editBooks->categories->count() > 0) {
+            //     $this->categories = $editBooks->categories;
+            // }
+
         }else {
             return redirect()->to('/e-catalog');
         }
+
+        // $editBooks->categories()->sync($this->categories);
+        // dd($this->all());
     }
 
     public function deleteBooks(int $books_id)
@@ -187,12 +275,12 @@ class IndexCatalog extends Component
         $books = $this->search === null ?
             Book::latest()->paginate($this->paginate) :
             Book::latest()->where('judul', 'like', '%' . $this->search . '%')->paginate($this->paginate);
-        
+
         $kategori = Category::all();
-        
+
         return view('livewire.admin-area.index-catalog', [
-            'books' => $books,
-            'kategori' => $kategori
+            'books'    => $books,
+            'kategori' => $kategori,
         ]);
     }
 }
