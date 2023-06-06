@@ -7,6 +7,7 @@ use Livewire\Component;
 use App\Models\Category;
 use Livewire\WithPagination;
 use Livewire\WithFileUploads;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 
 class IndexCatalog extends Component
@@ -39,10 +40,17 @@ class IndexCatalog extends Component
             'pengarang' => 'nullable',
             'abstrak' => 'nullable',
             'url' => 'nullable',
-            'cover' => 'nullable|image|max:1024',
-            'file' => 'nullable|file|max:2048'
+            'cover' => 'nullable|max:1024',
+            'file' => 'nullable|max:2048'
         ];
     }
+
+    protected $pesan = [
+        'cover.max' => 'Ukuran Foto maksimal 1 MB',
+        'file.max' => 'Ukuran Foto maksimal 2 MB',
+        'judul.required' => 'Judul tidak boleh kosong',
+        'kode_buku.required' => 'Kode Buku tidak boleh kosong'
+    ];
 
     public function updated($fields)
     {
@@ -133,7 +141,6 @@ class IndexCatalog extends Component
 
     public function updateBooks()
     {
-        dd($this->all());
         $pathCover = null;
         $pathFile  = null;
 
@@ -147,24 +154,7 @@ class IndexCatalog extends Component
             $pathCover = $this->cover->storeAs('', $newName);
         }
 
-        $validatedData = $this->validate([
-            'kode_buku' => 'required',
-            'judul' => 'required',
-            'jilid' => 'required',
-            'cetakan' => 'required',
-            'edisi' => 'required',
-            'kata_kunci' => 'required',
-            'bahasa' => 'required',
-            'isbn_issn' => 'required',
-            'halaman' => 'required',
-            'tahun_terbit' => 'required',
-            'kota_terbit' => 'required',
-            'penerbit' => 'required',
-            'pengarang' => 'required',
-            'abstrak' => 'required',
-            'url' => 'required',
-        ]);
-
+        $validatedData = $this->validate();
         $book = Book::findOrFail($this->books_id);
         $book->update([
             'kode_buku' => $validatedData['kode_buku'],
@@ -182,8 +172,8 @@ class IndexCatalog extends Component
             'pengarang' => $validatedData['pengarang'],
             'abstrak' => $validatedData['abstrak'],
             'url' => $validatedData['url'],
-            'cover' => $pathCover ?? $book->cover,
-            'file' => $pathFile ?? $book->file,
+            $pathCover => $validatedData['cover'],
+            $pathFile => $validatedData['file']
         ]);
 
         if ($this->categories) {
@@ -193,7 +183,6 @@ class IndexCatalog extends Component
         $this->resetInput();
         $this->dispatchBrowserEvent('close-modal', ['message' => 'Buku berhasil diupdate!']);
     }
-
 
     public function editBooks(int $books_id)
     {
@@ -219,17 +208,10 @@ class IndexCatalog extends Component
             $this->abstrak      = $editBooks->abstrak;
             $this->url          = $editBooks->url;
             $this->file         = $editBooks->file;
-
-            // if ($editBooks->categories->count() > 0) {
-            //     $this->categories = $editBooks->categories;
-            // }
-
         }else {
             return redirect()->to('/e-catalog');
         }
 
-        // $editBooks->categories()->sync($this->categories);
-        // dd($this->all());
     }
 
     public function deleteBooks(int $books_id)
@@ -239,10 +221,18 @@ class IndexCatalog extends Component
 
     public function destroyBooks()
     {
-        Book::find($this->books_id)->delete();
+        $book = Book::find($this->books_id);
+
+        // Hapus terlebih dahulu semua data yang memiliki ketergantungan pada tabel "book_category"
+        $book->categories()->detach();
+
+        // Hapus data dalam tabel "books"
+        $book->delete();
+
         $this->resetInput();
         $this->dispatchBrowserEvent('close-modal', ['message' => 'Buku berhasil dihapus!']);
     }
+
 
     private function resetInput()
     {

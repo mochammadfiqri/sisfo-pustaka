@@ -141,21 +141,24 @@
                         </select>
                     </div>
                     <label class="text-xs my-sm-0 text-red-600" for="select-category">* Tekan CTRL untuk memilih lebih dari 1 kategori</label>
-                    <div class="dropdown">
+                    {{-- <div class="dropdown">
                         <button class="btn bg-gradient-primary btn-sm float-start dropdown-toggle mb-2" type="button" id="dropdownMenuButton"
                             data-bs-toggle="dropdown" aria-expanded="false">
                             Kategori Sebelumnya
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            @foreach ($books->pluck('categories')->flatten() as $currentCategory)
-                                <li class="dropdown-item">{{ $currentCategory->name }}</a></li>
+                            @foreach ($books as $book)
+                                @foreach ($book->categories as $currentCategory)
+                                    <li class="dropdown-item" value="{{ $currentCategory->id }}">{{ $currentCategory->name }}</a></li>
+                                @endforeach
                             @endforeach
                         </ul>
-                    </div>
+                    </div> --}}
                     <div class="input-group input-group-outline mt-3">
                         <input wire:model="jilid" type="text" class="form-control" name="jilid" id="jilid"
                             placeholder="Masukan Jilid">
                     </div>
+                    {{-- {{ json_encode($errors->all()) }} --}}
                     <div class="input-group input-group-outline my-3">
                         <input wire:model="cetakan" type="text" class="form-control" name="cetakan" id="cetakan"
                             placeholder="Masukan Cetakan">
@@ -221,14 +224,9 @@
                                 aria-valuemin="0" aria-valuemax="100" x-bind:value="progress"></div>
                         </div>
                     </div>
-                    @error('cover') <span class="text-danger text-xs font-weight-light">{{ $message }}</span> @enderror
+                    @error('cover') <span class="text-danger text-xs font-weight-light">{{ $message }}</span><br> @enderror
                     <label class="text-sm mb-0 my-2" for="cover">Cover Buku :</label><br>
                     <div class="w-25 border-radius-sm shadow-sm">
-                        {{-- @if ($books->cover != '')
-                        <img src="{{ asset('storage/'.$books->cover) }}" class="w-100 border-radius-lg shadow-sm">
-                        @else
-                        <img src="{{ asset('img/cover-not-found.jpg') }}" class="w-100 border-radius-lg shadow-sm">
-                        @endif --}}
                         @if (isset($books->cover) && $books->cover != '')
                             <img src="{{ asset('storage/'.$books->cover) }}" width="150px">
                         @else
