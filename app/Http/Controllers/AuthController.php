@@ -69,11 +69,11 @@ class AuthController extends Controller
             
             $request->session()->regenerate();
             if(Auth::user()->role_id == 1){
-                return redirect('/dashboard');
+                return redirect('/dashboard')->with('toast_success', 'Login Berhasil');
             }
 
             if(Auth::user()->role_id ==2) {
-                return redirect('/member_area');
+                return redirect('/member_area')->with('toast_success', 'Login Berhasil');
             }
         }
         return redirect('/login')->with('toast_error', 'Username & Password Salah!');
@@ -84,6 +84,6 @@ class AuthController extends Controller
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return redirect('/login');
+        return redirect('/login')->with('toast_success', 'Berhasil Logout');;
     }
 }

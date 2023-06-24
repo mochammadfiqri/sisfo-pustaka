@@ -98,47 +98,7 @@ class IndexCatalog extends Component
         $this->resetInput();
         $this->dispatchBrowserEvent('close-modal', ['message' => 'Buku berhasil ditambahkan!']);
     }
-
-    // public function updateBooks()
-    // {
-    //     if ($this->file !== null) {
-    //         $newName  = now()->timestamp . '_' . $this->file->getClientOriginalName();
-    //         $pathFile = $this->file->storeAs($newName);
-    //     }
-
-    //     if ($this->cover !== null) {
-    //         $newName   = now()->timestamp . '_' . $this->cover->getClientOriginalName();
-    //         $pathCover = $this->cover->storeAs($newName);
-    //     }
-
-    //     $validatedData = $this->validate();
-    //     $book = Book::where('id', $this->books_id)->update([
-    //         'kode_buku' => $validatedData['kode_buku'],
-    //         'judul' => $validatedData['judul'],
-    //         'jilid' => $validatedData['jilid'],
-    //         'cetakan' => $validatedData['cetakan'],
-    //         'edisi' => $validatedData['edisi'],
-    //         'kata_kunci' => $validatedData['kata_kunci'],
-    //         'bahasa' => $validatedData['bahasa'],
-    //         'isbn_issn' => $validatedData['isbn_issn'],
-    //         'halaman' => $validatedData['halaman'],
-    //         'tahun_terbit' => $validatedData['tahun_terbit'],
-    //         'kota_terbit' => $validatedData['kota_terbit'],
-    //         'penerbit' => $validatedData['penerbit'],
-    //         'pengarang' => $validatedData['pengarang'],
-    //         'abstrak' => $validatedData['abstrak'],
-    //         'url' => $validatedData['url'],
-    //         $pathCover => $validatedData['cover'],
-    //         $pathFile => $validatedData['file']
-    //     ]);
-
-    //     if ($this->categories) {
-    //         $book->categories()->sync($this->categories);
-    //     }
-    //     $this->resetInput();
-    //     $this->dispatchBrowserEvent('close-modal', ['message' => 'Buku berhasil diupdate!']);
-    // }
-
+    
     public function updateBooks()
     {
         $pathCover = null;
@@ -186,8 +146,6 @@ class IndexCatalog extends Component
 
     public function editBooks(int $books_id)
     {
-        
-        // $books = Book::find($books_id);
         $editBooks = Book::find($books_id);
         if ($editBooks) {
             $this->books_id     = $editBooks->id;

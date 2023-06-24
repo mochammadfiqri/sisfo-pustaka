@@ -67,9 +67,7 @@
             </div>
             <form wire:submit.prevent="destroyCategory">
                 <div class="modal-body">
-                    <div class="mb-4">
-                        <h5 class="font-weight-normal">Apakah anda yakin akan menghapus Kategori ini ?</h5>
-                    </div>
+                    Apakah anda yakin akan menghapus Kategori ini ?
                     <div style="float: right;" class="border-0">
                         <button type="button" class="btn btn-primary" wire:click="closeModal"
                             data-bs-dismiss="modal">Batal</button>

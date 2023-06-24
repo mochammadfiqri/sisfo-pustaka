@@ -9,7 +9,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form wire:submit.prevent="createBooks" enctype="multipart/form-data">
+            <form wire:submit.preventwire:submit.prevent="createBooks" enctype="multipart/form-data">
                 <div class="modal-body">
                     <div class="input-group input-group-outline mt-1">
                         <input wire:model="kode_buku" type="text" class="form-control" name="kode_buku" id="kode_buku" placeholder="Masukan Kode Buku">
@@ -141,19 +141,6 @@
                         </select>
                     </div>
                     <label class="text-xs my-sm-0 text-red-600" for="select-category">* Tekan CTRL untuk memilih lebih dari 1 kategori</label>
-                    {{-- <div class="dropdown">
-                        <button class="btn bg-gradient-primary btn-sm float-start dropdown-toggle mb-2" type="button" id="dropdownMenuButton"
-                            data-bs-toggle="dropdown" aria-expanded="false">
-                            Kategori Sebelumnya
-                        </button>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            @foreach ($books as $book)
-                                @foreach ($book->categories as $currentCategory)
-                                    <li class="dropdown-item" value="{{ $currentCategory->id }}">{{ $currentCategory->name }}</a></li>
-                                @endforeach
-                            @endforeach
-                        </ul>
-                    </div> --}}
                     <div class="input-group input-group-outline mt-3">
                         <input wire:model="jilid" type="text" class="form-control" name="jilid" id="jilid"
                             placeholder="Masukan Jilid">
@@ -258,7 +245,7 @@
             <form wire:submit.prevent="destroyBooks">
                 <div class="modal-body">
                     <div class="mb-4">
-                        <h5 class="font-weight-normal">Apakah anda yakin akan menghapus Buku ini ?</h5>
+                        Apakah anda yakin akan menghapus Buku ini ?
                     </div>
                     <div style="float: right;" class="border-0">
                         <button type="button" class="btn btn-primary" wire:click="closeModal"

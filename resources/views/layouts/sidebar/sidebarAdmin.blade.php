@@ -51,14 +51,14 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="/e-catalog" class="nav-link text-white {{ request()->routeIs('catalog') ? 'active' : '' }}" aria-controls="catalogExamples"
+                <a href="/e-catalog" class="nav-link text-white {{ request()->routeIs('catalog') || str_contains(request()->url(), '/e-catalog/detail/') ? 'active' : '' }}" aria-controls="catalogExamples"
                     role="button" aria-expanded="false">
                     <i class="material-icons-round opacity-10">book</i>
                     <span class="nav-link-text ms-2 ps-1">E - Catalog</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a href="/kategori-buku" class="nav-link text-white {{ request()->routeIs('kategori') ? 'active' : '' }}" aria-controls="dashboardsExamples"
+                <a href="/kategori-buku" class="nav-link text-white {{ request()->routeIs('kategori') ? 'active' : '' }}" aria-controls="kategoriExamples"
                     role="button" aria-expanded="false">
                     <i class="material-icons-round opacity-10">category</i>
                     <span class="nav-link-text ms-2 ps-1">Kategori Buku</span>
@@ -88,6 +88,12 @@
             <li class="nav-item">
                 <hr class="horizontal light">
                 <h6 class="ps-4  ms-2 text-uppercase text-xs font-weight-bolder text-white">ACCOUNT</h6>
+            </li>
+            <li class="nav-item">
+                 <a href="/users" class="nav-link text-white {{ request()->routeIs('users') || str_contains(request()->url(), '/users/detail/') ? 'active' : '' }}" aria-controls="dashboardsExamples" role="button" aria-expanded="false">
+                    <i class="material-icons-round opacity-10">person</i>
+                    <span class="nav-link-text ms-2 ps-1">Users</span>
+                </a>
             </li>
             <li class="nav-item">
                 <a href="#" class="nav-link text-white" aria-controls="dashboardsExamples"

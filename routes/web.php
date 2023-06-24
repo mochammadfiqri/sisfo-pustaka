@@ -2,14 +2,14 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Livewire\MemberArea\Member;
+use App\Http\Controllers\UsersController;
+use App\Http\Controllers\DetailController;
 use App\Http\Controllers\CatalogController;
-use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\WebsiteController;
-use App\Http\Livewire\AdminArea\DetailCatalog;
-use App\Http\Livewire\AdminArea\IndexDetail;
-use App\Http\Livewire\MemberArea\Member;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,11 +36,27 @@ Route::middleware('only_guest')->group(function() {
 
 Route::middleware('auth')->group(function() {
     Route::get('/logout', [AuthController::class, 'logout']);
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard')->middleware('only_admin');
-    Route::get('/e-catalog', [CatalogController::class, 'index'])->name('catalog')->middleware('only_admin');
-    Route::get('/e-catalog/detail/{id}', [CatalogController::class, 'show'])->name('show')->middleware('only_admin');
-    Route::get('/kategori-buku', [CategoryController::class, 'index'])->name('kategori')->middleware('only_admin');
-    Route::get('/profile-admin', [ProfileController::class, 'indexAdmin'])->name('profileAdmin')->middleware('only_admin');
-    Route::get('/profile-member', [ProfileController::class, 'indexMember'])->name('profileMember')->middleware('only_member');
-    Route::get('/member_area', Member::class)->middleware(['only_member']);
+
+    Route::middleware('only_admin')->group(function() {
+        Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+        Route::get('/e-catalog', [CatalogController::class, 'index'])->name('catalog');
+        Route::get('/e-catalog/detail/{id}', [CatalogController::class, 'show'])->name('show');
+
+        Route::get('/kategori-buku', [CategoryController::class, 'index'])->name('kategori');
+
+        // Route::get('/users', IndexUsers::class)->name('users')->middleware(['only_admin']);
+        Route::get('/users', [UsersController::class, 'index'])->name('users');
+        // Route::get('/users/detail/{id}', DetailUsers::class)->name('detailUsers');
+        Route::get('/users/detail/{id}', [DetailController::class, 'index'])->name('index');
+        // Route::get('user-approve/{id}', DetailUsers::class, 'approveUsers')->name('approveUsers');
+
+        Route::get('user-approve/{id}', [DetailController::class, 'userApprove']);
+
+        Route::get('/profile-admin', [ProfileController::class, 'indexAdmin'])->name('profileAdmin');
+    });
+    
+    Route::middleware('only_member')->group(function() {
+        Route::get('/profile-member', [ProfileController::class, 'indexMember'])->name('profileMember');
+        Route::get('/member_area', Member::class);
+    });
 });
