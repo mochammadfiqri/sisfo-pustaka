@@ -76,7 +76,8 @@ class IndexUsers extends Component
                 ->paginate($this->paginate) :
             User::latest()
                 ->where('role_id', 2)
-                ->where('judul', 'like', '%' . $this->search . '%')
+                ->where('username', 'like', '%' . $this->search . '%')
+                ->orWhere('no_hp', 'like', '%' . $this->search . '%')
                 ->where('status', 'active')
                 ->paginate($this->paginate);
 

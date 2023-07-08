@@ -18,7 +18,7 @@ class OnlyMember
     public function handle(Request $request, Closure $next)
     {
         if(Auth::user()->role_id != 2) {
-            return redirect('website');
+            return redirect('/dashboard');
         }
 
         return $next($request);

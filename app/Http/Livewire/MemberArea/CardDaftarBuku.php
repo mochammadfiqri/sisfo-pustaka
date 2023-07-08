@@ -4,10 +4,10 @@ namespace App\Http\Livewire\MemberArea;
 
 use Livewire\Component;
 
-class Member extends Component
+class TableDaftarBuku extends Component
 {
     public function render()
     {
-        return view('livewire.member-area.member')->extends('layouts.app');
+        return view('livewire.member-area.card-daftar-buku');
     }
 }

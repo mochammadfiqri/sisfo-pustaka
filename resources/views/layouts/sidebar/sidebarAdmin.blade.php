@@ -65,7 +65,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="#" class="nav-link text-white" aria-controls="dashboardsExamples"
+                <a href="/peminjaman-buku" class="nav-link text-white {{ request()->routeIs('peminjamanBuku') ? 'active' : '' }}" aria-controls="dashboardsExamples"
                     role="button" aria-expanded="false">
                     <i class="material-icons-round opacity-10">credit_score</i>
                     <span class="nav-link-text ms-2 ps-1">Peminjaman Buku</span>

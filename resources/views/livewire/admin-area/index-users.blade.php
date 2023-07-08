@@ -30,8 +30,10 @@
                         <option value="15">15</option>
                     </select>
                     <div class="col col-md-3 float-end me-3">
-                        <div class="input-group input-group-outline">
-                            <input wire:model="search" type="text" class="form-control" placeholder="Cari...">
+                        <div class="input-group input-group-outline @if ($errors->has('search')) is-filled is-invalid @elseif ($search) is-filled is-valid @endif">
+                            <label class="form-label">Cari Anggota...</label>
+                            <input wire:model="search" type="text" class="form-control" oninput="checkInput(this)" onfocus="focused(this)"
+                                onfocusout="defocused(this)">
                         </div>
                     </div>
                 </div>

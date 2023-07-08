@@ -51,19 +51,19 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="/e-catalog" class="nav-link text-white {{ request()->routeIs('catalog') ? 'active' : '' }}" aria-controls="catalogExamples"
+                <a href="/daftarbuku" class="nav-link text-white {{ request()->routeIs('daftarbuku') ? 'active' : '' }}" aria-controls="catalogExamples"
                     role="button" aria-expanded="false">
                     <i class="material-icons-round opacity-10">book</i>
-                    <span class="nav-link-text ms-2 ps-1">E - Catalog</span>
+                    <span class="nav-link-text ms-2 ps-1">Daftar Buku</span>
                 </a>
             </li>
-            <li class="nav-item">
+            {{-- <li class="nav-item">
                 <a href="/kategori-buku" class="nav-link text-white {{ request()->routeIs('kategori') ? 'active' : '' }}" aria-controls="dashboardsExamples"
                     role="button" aria-expanded="false">
                     <i class="material-icons-round opacity-10">category</i>
                     <span class="nav-link-text ms-2 ps-1">Kategori Buku</span>
                 </a>
-            </li>
+            </li> --}}
             <li class="nav-item">
                 <a href="#" class="nav-link text-white" aria-controls="dashboardsExamples"
                     role="button" aria-expanded="false">
@@ -89,13 +89,13 @@
                 <hr class="horizontal light">
                 <h6 class="ps-4  ms-2 text-uppercase text-xs font-weight-bolder text-white">ACCOUNT</h6>
             </li>
-            <li class="nav-item">
+            {{-- <li class="nav-item">
                 <a href="#" class="nav-link text-white" aria-controls="dashboardsExamples"
                     role="button" aria-expanded="false">
                     <i class="material-icons-round opacity-10">groups_2</i>
                     <span class="nav-link-text ms-2 ps-1">Daftar Pengunjung</span>
                 </a>
-            </li>
+            </li> --}}
             <li class="nav-item">
                 <a data-bs-toggle="collapse" href="#dashboardsExamples" class="nav-link text-white"
                     aria-controls="dashboardsExamples" role="button" aria-expanded="false">
@@ -110,12 +110,12 @@
                                 <span class="nav-link-text ms-2 ps-1">Manage Account</span>
                             </a>
                         </li>
-                        <li class="nav-item active">
+                        {{-- <li class="nav-item active">
                             <a class="nav-link text-white active" href="../../pages/dashboards/analytics.html">
                                 <i class="material-icons-round opacity-10">settings_applications</i>
                                 <span class="nav-link-text ms-2 ps-1">Kelola Data<br> Perpustakaan</span>
                             </a>
-                        </li>
+                        </li> --}}
                     </ul>
                 </div>
             </li>

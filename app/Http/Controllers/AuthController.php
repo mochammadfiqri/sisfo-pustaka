@@ -73,7 +73,7 @@ class AuthController extends Controller
             }
 
             if(Auth::user()->role_id ==2) {
-                return redirect('/member_area')->with('toast_success', 'Login Berhasil');
+                return redirect('/dashboard')->with('toast_success', 'Login Berhasil');
             }
         }
         return redirect('/login')->with('toast_error', 'Username & Password Salah!');

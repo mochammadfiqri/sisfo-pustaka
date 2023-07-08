@@ -4,8 +4,11 @@
 @section('navbar2', 'E-Catalog')
 
 @push('addonsStyle')
-    {{-- <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" /> --}}
+    <!-- Material Bootstrap Choices -->
+    {{-- <link rel="stylesheet" href="{{ asset('css/choices.min.css') }}" /> --}}
+    {{-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/base.min.css" /> --}}
+    {{-- <script src="{{ asset('js/plugins/choices.min.js') }}"></script> --}}
+    <link rel="stylesheet" href="{{ asset('css/bootstrap-select.min.css') }}">
 @endpush
 
 @section('content')
@@ -13,20 +16,61 @@
 @endsection
 
 @push('addonsScript')
-    {{-- <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-    <script>
-            $(document).ready(function(){
-                $( '#select-multiple' ).select2( {
-                theme: "bootstrap-5",
-                selectionCssClass: "select2--small", // For Select2 v4.1
-                dropdownCssClass: "select2--small",
-                width: $( this ).data( 'width' ) ? $( this ).data( 'width' ) : $( this ).hasClass( 'w-100' ) ? '100%' : 'style',
-                placeholder: $( this ).data( 'placeholder' ),
-                closeOnSelect: false,
-                } );
+    {{-- <script>
+        document.addEventListener('DOMContentLoaded', function() {
+                var multipleCancelButton = new Choices(
+                    '#choices-multiple-remove-button',
+                    {
+                        allowHTML: true,
+                        removeItemButton: true,
+                    }
+                );
             });
     </script> --}}
+    <script>
+        document.addEventListener('livewire:load', function () {
+            const inputs = document.querySelectorAll('.form-control');
+    
+            inputs.forEach(function (input) {
+                const div = input.parentNode;
+                const errorElement = div.querySelector('.text-danger');
+    
+                // Check initial input value
+                if (input.value.trim() !== '') {
+                    div.classList.add('is-filled');
+                    if (input.checkValidity() && !errorElement) {
+                        div.classList.add('is-valid');
+                    }
+                }
+    
+                // Check input on focusout
+                input.addEventListener('focusout', function () {
+                    if (input.value.trim() !== '') {
+                        div.classList.add('is-filled');
+                        if (input.checkValidity() && !errorElement) {
+                            div.classList.add('is-valid');
+                            div.classList.remove('is-invalid');
+                        } else {
+                            div.classList.remove('is-valid');
+                            div.classList.add('is-invalid');
+                        }
+                    } else {
+                        div.classList.remove('is-filled');
+                        div.classList.remove('is-valid');
+                        div.classList.remove('is-invalid');
+                    }
+                });
+            });
+        });
+    
+        function focused(input) {
+            input.parentNode.classList.add('is-focused');
+        }
+    
+        function defocused(input) {
+            input.parentNode.classList.remove('is-focused');
+        }
+    </script>
     <script>
         $(document).ready(function() {
                 toastr.options = {
@@ -55,4 +99,14 @@
                 })
             });
     </script>
+    <script src="{{ asset('js/plugins/bootstrap-select.min.js') }}"></script>
+    {{-- <script>
+        $('.selectpicker').on('hide.bs.select', function (e) {
+        var target = $(e.relatedTarget);
+        if (target.is('input[type="text"]')) {
+        e.preventDefault();
+        e.stopPropagation();
+        }
+        });
+    </script> --}}
 @endpush

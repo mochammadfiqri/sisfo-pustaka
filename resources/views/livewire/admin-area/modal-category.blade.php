@@ -11,10 +11,11 @@
             </div>
             <form wire:submit.prevent="createCategory">
                 <div class="modal-body">
-                    <div class="input-group input-group-outline my-3">
-                        {{-- <label class="form-label">Masukan Kategori Baru</label> --}}
-                        <input wire:model="name" type="text" class="form-control" id="name" placeholder="Masukan Kategori Baru">
-                    </div>                    
+                    <div class="input-group input-group-outline mt-0 mb-3 @if ($errors->has('name')) is-filled is-invalid @elseif ($name) is-filled is-valid @endif">
+                        <label class="form-label">Kategori Baru</label>
+                        <input wire:model="name" type="text" class="form-control" oninput="checkInput(this)" onfocus="focused(this)"
+                            onfocusout="defocused(this)">
+                    </div>
                     <div style="float: right;" class="border-0">
                         <button type="button" class="btn btn-primary" wire:click="closeModal" data-bs-dismiss="modal">Batal</button>
                         <button type="submit" class="btn btn-success">Simpan</button>
@@ -38,10 +39,10 @@
             </div>
             <form wire:submit.prevent="updateCategory">
                 <div class="modal-body">
-                    <div class="input-group input-group-outline my-3">
-                        {{-- <label class="form-label">Masukan Kategori Baru</label> --}}
-                        <input wire:model="name" type="text" class="form-control" id="name"
-                            placeholder="Masukan Kategori Baru">
+                    <div class="input-group input-group-outline mt-0 mb-3 @if ($errors->has('name')) is-filled is-invalid @elseif ($name) is-filled is-valid @endif">
+                        <label class="form-label">Kategori Baru</label>
+                        <input wire:model="name" type="text" class="form-control" oninput="checkInput(this)" onfocus="focused(this)"
+                            onfocusout="defocused(this)">
                     </div>
                     <div style="float: right;" class="border-0">
                         <button type="button" class="btn btn-primary" wire:click="closeModal"

@@ -189,6 +189,7 @@ class IndexCatalog extends Component
 
         $this->resetInput();
         $this->dispatchBrowserEvent('close-modal', ['message' => 'Buku berhasil dihapus!']);
+
     }
 
 
@@ -198,6 +199,7 @@ class IndexCatalog extends Component
         $this->judul = '';
         $this->cover = '';
         $this->jilid = '';
+        $this->categories = [];
         $this->cetakan = '';
         $this->edisi = '';
         $this->kata_kunci = '';

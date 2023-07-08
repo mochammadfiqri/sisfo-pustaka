@@ -2,9 +2,12 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BookListController;
+use App\Http\Controllers\BookRentController;
 use App\Http\Livewire\MemberArea\Member;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\DetailController;
+use App\Http\Controllers\MemberController;
 use App\Http\Controllers\CatalogController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\WebsiteController;
@@ -23,7 +26,8 @@ use App\Http\Controllers\DashboardController;
 */
 
 Route::get('/', function () {
-    return redirect('/login');
+    // return redirect('/login');
+    return view('publicArea.index');
 });
 
 Route::middleware('only_guest')->group(function() {
@@ -31,18 +35,21 @@ Route::middleware('only_guest')->group(function() {
     Route::post('login', [AuthController::class, 'authenticate']);
     Route::get('register', [AuthController::class, 'register']);
     Route::post('register', [AuthController::class, 'registerProcess']);
-    Route::get('/website', [WebsiteController::class, 'index']);
+    // Route::get('/website', [WebsiteController::class, 'index']);
 });
 
 Route::middleware('auth')->group(function() {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/logout', [AuthController::class, 'logout']);
 
     Route::middleware('only_admin')->group(function() {
-        Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+        // Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
         Route::get('/e-catalog', [CatalogController::class, 'index'])->name('catalog');
         Route::get('/e-catalog/detail/{id}', [CatalogController::class, 'show'])->name('show');
 
         Route::get('/kategori-buku', [CategoryController::class, 'index'])->name('kategori');
+
+        Route::get('/peminjaman-buku', [BookRentController::class, 'index'])->name('peminjamanBuku');
 
         // Route::get('/users', IndexUsers::class)->name('users')->middleware(['only_admin']);
         Route::get('/users', [UsersController::class, 'index'])->name('users');
@@ -57,6 +64,8 @@ Route::middleware('auth')->group(function() {
     
     Route::middleware('only_member')->group(function() {
         Route::get('/profile-member', [ProfileController::class, 'indexMember'])->name('profileMember');
-        Route::get('/member_area', Member::class);
+        // Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboardMember');
+        Route::get('/daftarbuku', [BookListController::class, 'index'])->name('daftarbuku');
+        // Route::get('/member_area', Member::class);
     });
 });

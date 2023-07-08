@@ -9,71 +9,107 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form wire:submit.preventwire:submit.prevent="createBooks" enctype="multipart/form-data">
+            <form wire:submit.prevent="createBooks" enctype="multipart/form-data">
                 <div class="modal-body">
-                    <div class="input-group input-group-outline mt-1">
-                        <input wire:model="kode_buku" type="text" class="form-control" name="kode_buku" id="kode_buku" placeholder="Masukan Kode Buku">
+                    <div class="input-group input-group-outline mt-0 mb-3 @if ($errors->has('kode_buku')) is-filled is-invalid @elseif ($kode_buku) is-filled is-valid @endif">
+                        <label class="form-label">Kode Buku</label>
+                        <input wire:model="kode_buku" type="text" class="form-control" oninput="checkInput(this)" onfocus="focused(this)"
+                            onfocusout="defocused(this)" data-gtm-form-interact-field-id="3">
                     </div>
-                    @error('kode_buku') <span class="text-danger text-xs font-weight-light">{{ $message }}</span> @enderror
-                    <div class="input-group input-group-outline mt-3">
-                        <input wire:model="judul" type="text" class="form-control" name="judul" id="judul" placeholder="Masukan Judul">
+                    <div class="input-group input-group-outline my-3 @if ($errors->has('judul')) is-filled is-invalid @elseif ($judul) is-filled is-valid @endif">
+                        <label class="form-label">Judul Buku</label>
+                        <input wire:model="judul" type="text" class="form-control" oninput="checkInput(this)" onfocus="focused(this)"
+                            onfocusout="defocused(this)" data-gtm-form-interact-field-id="3">
                     </div>
-                    @error('judul') <span class="text-danger text-xs font-weight-light">{{ $message }}</span> @enderror
                     <div wire:ignore class="input-group input-group-outline mt-3">
-                        <select name="categories[]" id="select-multiple" wire:model='categories' data-placeholder="Pilih Kategori..." class="form-control" multiple="multiple">
+                        {{-- <select wire:ignore wire:model='categories' data-placeholder="Pilih Kategori..." class="form-control selectpicker" data-live-search="true" multiple>
+                            @foreach ($kategori as $item)
+                                <option value="{{ $item->id }}">{{ $item->name }}</option>
+                            @endforeach
+                        </select> --}}
+                        <select wire:model='categories' data-placeholder="Pilih Kategori..." class="form-control" multiple>
                             @foreach ($kategori as $item)
                                 <option value="{{ $item->id }}">{{ $item->name }}</option>
                             @endforeach
                         </select>
                     </div>
-                    <label class="text-xs my-sm-0 text-red-600" for="select-category">* Tekan CTRL untuk memilih lebih dari 1
-                        kategori</label>
-                    <div class="input-group input-group-outline mt-2">
-                        <input wire:model="jilid" type="text" class="form-control" name="jilid" id="jilid" placeholder="Masukan Jilid">
+                    <label class="form-label text-xs mb-1 mb-lg-1 mb-md-1">* Tekan <b>CTRL</b> untuk memilih lebih dari 1 Kategori</label>
+                    <div class="input-group input-group-outline mt-2 mb-3 mb-lg-3 mb-md-3 @if ($errors->has('jilid')) is-filled is-invalid @elseif ($jilid) is-filled is-valid @endif">
+                        <label class="form-label">Jilid</label>
+                        <input wire:model="jilid" type="text" class="form-control" oninput="checkInput(this)" onfocus="focused(this)"
+                            onfocusout="defocused(this)" data-gtm-form-interact-field-id="3">
                     </div>
-                    <div class="input-group input-group-outline my-3">
-                        <input wire:model="cetakan" type="text" class="form-control" name="cetakan" id="cetakan" placeholder="Masukan Cetakan">
+                    <div
+                        class="input-group input-group-outline mt-3 mb-3 mb-lg-3 mb-md-3 @if ($errors->has('cetakan')) is-filled is-invalid @elseif ($cetakan) is-filled is-valid @endif">
+                        <label class="form-label">Cetakan</label>
+                        <input wire:model="cetakan" type="text" class="form-control" oninput="checkInput(this)" onfocus="focused(this)"
+                            onfocusout="defocused(this)" data-gtm-form-interact-field-id="3">
                     </div>
-                    <div class="input-group input-group-outline my-3">
-                        <input wire:model="edisi" type="text" class="form-control" name="edisi" id="edisi" placeholder="Masukan Edisi">
+                    <div
+                        class="input-group input-group-outline mt-3 mb-3 mb-lg-3 mb-md-3 @if ($errors->has('edisi')) is-filled is-invalid @elseif ($edisi) is-filled is-valid @endif">
+                        <label class="form-label">Edisi</label>
+                        <input wire:model="edisi" type="text" class="form-control" oninput="checkInput(this)" onfocus="focused(this)"
+                            onfocusout="defocused(this)" data-gtm-form-interact-field-id="3">
                     </div>
-                    <div class="input-group input-group-outline my-3">
-                        <input wire:model="kata_kunci" type="text" class="form-control" name="kata_kunci" id="kata_kunci" placeholder="Masukan Kata Kunci">
+                    <div
+                        class="input-group input-group-outline mt-3 mb-3 mb-lg-3 mb-md-3 @if ($errors->has('kata_kunci')) is-filled is-invalid @elseif ($kata_kunci) is-filled is-valid @endif">
+                        <label class="form-label">Kata Kunci</label>
+                        <input wire:model="kata_kunci" type="text" class="form-control" oninput="checkInput(this)" onfocus="focused(this)"
+                            onfocusout="defocused(this)" data-gtm-form-interact-field-id="3">
                     </div>
-                    <div class="input-group input-group-outline my-3">
-                        <input wire:model="bahasa" type="text" class="form-control" name="bahasa" id="bahasa"
-                            placeholder="Masukan bahasa">
+                    <div
+                        class="input-group input-group-outline mt-3 mb-3 mb-lg-3 mb-md-3 @if ($errors->has('bahasa')) is-filled is-invalid @elseif ($bahasa) is-filled is-valid @endif">
+                        <label class="form-label">Bahasa</label>
+                        <input wire:model="bahasa" type="text" class="form-control" oninput="checkInput(this)" onfocus="focused(this)"
+                            onfocusout="defocused(this)" data-gtm-form-interact-field-id="3">
                     </div>
-                    <div class="input-group input-group-outline my-3">
-                        <input wire:model="isbn_issn" type="number" class="form-control" name="isbn_issn" id="isbn_issn"
-                            placeholder="Masukan ISBN / ISSN">
+                    <div
+                        class="input-group input-group-outline mt-3 mb-3 mb-lg-3 mb-md-3 @if ($errors->has('isbn_issn')) is-filled is-invalid @elseif ($isbn_issn) is-filled is-valid @endif">
+                        <label class="form-label">ISBN / ISSN</label>
+                        <input wire:model="isbn_issn" type="number" class="form-control" oninput="checkInput(this)" onfocus="focused(this)"
+                            onfocusout="defocused(this)" data-gtm-form-interact-field-id="3">
                     </div>
-                    <div class="input-group input-group-outline my-3">
-                        <input wire:model="halaman" type="number" class="form-control" name="halaman" id="halaman"
-                            placeholder="Masukan Halaman">
+                    <div
+                        class="input-group input-group-outline mt-3 mb-3 mb-lg-3 mb-md-3 @if ($errors->has('halaman')) is-filled is-invalid @elseif ($halaman) is-filled is-valid @endif">
+                        <label class="form-label">Halaman</label>
+                        <input wire:model="halaman" type="number" class="form-control" oninput="checkInput(this)" onfocus="focused(this)"
+                            onfocusout="defocused(this)" data-gtm-form-interact-field-id="3">
                     </div>
-                    <div class="input-group input-group-outline my-3">
-                        <input wire:model="tahun_terbit" type="number" class="form-control" name="tahun_terbit" id="tahun_terbit"
-                            placeholder="Masukan Tahun Terbit">
+                    <div
+                        class="input-group input-group-outline mt-3 mb-3 mb-lg-3 mb-md-3 @if ($errors->has('tahun_terbit')) is-filled is-invalid @elseif ($tahun_terbit) is-filled is-valid @endif">
+                        <label class="form-label">Tahun Terbit</label>
+                        <input wire:model="tahun_terbit" type="number" class="form-control" oninput="checkInput(this)" onfocus="focused(this)"
+                            onfocusout="defocused(this)" data-gtm-form-interact-field-id="3">
                     </div>
-                    <div class="input-group input-group-outline my-3">
-                        <input wire:model="kota_terbit" type="text" class="form-control" name="kota_terbit" id="kota_terbit"
-                            placeholder="Masukan Kota Terbit">
+                    <div
+                        class="input-group input-group-outline mt-3 mb-3 mb-lg-3 mb-md-3 @if ($errors->has('kota_terbit')) is-filled is-invalid @elseif ($kota_terbit) is-filled is-valid @endif">
+                        <label class="form-label">Kota Terbit</label>
+                        <input wire:model="kota_terbit" type="text" class="form-control" oninput="checkInput(this)" onfocus="focused(this)"
+                            onfocusout="defocused(this)" data-gtm-form-interact-field-id="3">
                     </div>
-                    <div class="input-group input-group-outline my-3">
-                        <input wire:model="penerbit" type="text" class="form-control" name="penerbit" id="penerbit"
-                            placeholder="Masukan Penerbit">
+                    <div
+                        class="input-group input-group-outline mt-3 mb-3 mb-lg-3 mb-md-3 @if ($errors->has('penerbit')) is-filled is-invalid @elseif ($penerbit) is-filled is-valid @endif">
+                        <label class="form-label">Penerbit</label>
+                        <input wire:model="penerbit" type="text" class="form-control" oninput="checkInput(this)" onfocus="focused(this)"
+                            onfocusout="defocused(this)" data-gtm-form-interact-field-id="3">
                     </div>
-                    <div class="input-group input-group-outline my-3">
-                        <input wire:model="pengarang" type="text" class="form-control" name="pengarang" id="pengarang"
-                            placeholder="Masukan Pengarang">
+                    <div
+                        class="input-group input-group-outline mt-3 mb-3 mb-lg-3 mb-md-3 @if ($errors->has('pengarang')) is-filled is-invalid @elseif ($pengarang) is-filled is-valid @endif">
+                        <label class="form-label">Pengarang</label>
+                        <input wire:model="pengarang" type="text" class="form-control" oninput="checkInput(this)" onfocus="focused(this)"
+                            onfocusout="defocused(this)" data-gtm-form-interact-field-id="3">
                     </div>
-                    <div class="input-group input-group-outline my-3">
-                        <textarea wire:model='abstrak' class="form-control" name="abstrak" id="abstrak" cols="15" rows="5" placeholder="Masukan Abstrak"></textarea>
+                    <div
+                        class="input-group input-group-outline mt-3 mb-3 mb-lg-3 mb-md-3 @if ($errors->has('abstrak')) is-filled is-invalid @elseif ($abstrak) is-filled is-valid @endif">
+                        <label class="form-label">Abstrak</label>
+                        <textarea wire:model="abstrak" type="text" cols="5" rows="5" class="form-control" oninput="checkInput(this)" onfocus="focused(this)"
+                            onfocusout="defocused(this)" data-gtm-form-interact-field-id="3"></textarea>
                     </div>
-                    <div class="input-group input-group-outline my-3">
-                        <input wire:model="url" type="text" class="form-control" name="url" id="url"
-                            placeholder="Contoh: https://www.google.com">
+                    <div
+                        class="input-group input-group-outline mt-3 mb-3 mb-lg-3 mb-md-3 @if ($errors->has('url')) is-filled is-invalid @elseif ($url) is-filled is-valid @endif">
+                        <label class="form-label">Website</label>
+                        <input wire:model="url" type="text" class="form-control" oninput="checkInput(this)" onfocus="focused(this)"
+                            onfocusout="defocused(this)" data-gtm-form-interact-field-id="3">
                     </div>
                     <label class="text-sm mb-0" for="cover">Pilih File</label>
                     <div class="input-group input-group-outline my-1">
@@ -122,76 +158,96 @@
             </div>
             <form wire:submit.prevent="updateBooks" enctype="multipart/form-data">
                 <div class="modal-body">
-                    <div class="input-group input-group-outline mt-1">
-                        <input wire:model="kode_buku" type="text" class="form-control" name="kode_buku" id="kode_buku"
-                            placeholder="Masukan Kode Buku">
+                    <div
+                        class="input-group input-group-outline mt-0 mb-3 mb-lg-3 mb-md-3 @if ($errors->has('kode_buku')) is-filled is-invalid @elseif ($kode_buku) is-filled is-valid @endif">
+                        <label class="form-label">Kode Buku</label>
+                        <input wire:model="kode_buku" type="text" class="form-control" oninput="checkInput(this)" onfocus="focused(this)"
+                            onfocusout="defocused(this)" data-gtm-form-interact-field-id="3">
                     </div>
-                    @error('kode_buku') <span class="text-danger text-xs font-weight-light">{{ $message }}</span>
-                    @enderror
-                    <div class="input-group input-group-outline mt-3">
-                        <input wire:model="judul" type="text" class="form-control" name="judul" id="judul"
-                            placeholder="Masukan Judul">
+                    <div
+                        class="input-group input-group-outline my-3 @if ($errors->has('judul')) is-filled is-invalid @elseif ($judul) is-filled is-valid @endif">
+                        <label class="form-label">Judul Buku</label>
+                        <input wire:model="judul" type="text" class="form-control" oninput="checkInput(this)" onfocus="focused(this)"
+                            onfocusout="defocused(this)" data-gtm-form-interact-field-id="3">
                     </div>
-                    @error('judul') <span class="text-danger text-xs font-weight-light">{{ $message }}</span> @enderror
                     <div wire:ignore class="input-group input-group-outline mt-3">
-                        <select name="categories[]" id="select-multiple" wire:model='categories' data-placeholder="Pilih Kategori..." class="form-control" multiple="multiple">
+                        <select wire:model='categories' data-placeholder="Pilih Kategori..." class="form-control" multiple>
                             @foreach ($kategori as $item)
-                                <option value="{{ $item->id }}">{{ $item->name }}</option>
+                            <option value="{{ $item->id }}">{{ $item->name }}</option>
                             @endforeach
                         </select>
                     </div>
-                    <label class="text-xs my-sm-0 text-red-600" for="select-category">* Tekan CTRL untuk memilih lebih dari 1 kategori</label>
-                    <div class="input-group input-group-outline mt-3">
-                        <input wire:model="jilid" type="text" class="form-control" name="jilid" id="jilid"
-                            placeholder="Masukan Jilid">
+                    <label class="form-label text-xs mb-1 mb-lg-1 mb-md-1">* Tekan <b>CTRL</b> untuk memilih lebih dari 1 Kategori</label>
+                    <div class="input-group input-group-outline mt-2 mb-3 @if ($errors->has('cetakan')) is-filled is-invalid @elseif ($cetakan) is-filled is-valid @endif">
+                        <label class="form-label">Cetakan</label>
+                        <input wire:model="cetakan" type="text" class="form-control" oninput="checkInput(this)" onfocus="focused(this)"
+                            onfocusout="defocused(this)" data-gtm-form-interact-field-id="3">
                     </div>
-                    {{-- {{ json_encode($errors->all()) }} --}}
-                    <div class="input-group input-group-outline my-3">
-                        <input wire:model="cetakan" type="text" class="form-control" name="cetakan" id="cetakan"
-                            placeholder="Masukan Cetakan">
+                    <div
+                        class="input-group input-group-outline my-3 @if ($errors->has('edisi')) is-filled is-invalid @elseif ($edisi) is-filled is-valid @endif">
+                        <label class="form-label">Edisi</label>
+                        <input wire:model="edisi" type="text" class="form-control" oninput="checkInput(this)" onfocus="focused(this)"
+                            onfocusout="defocused(this)" data-gtm-form-interact-field-id="3">
                     </div>
-                    <div class="input-group input-group-outline my-3">
-                        <input wire:model="edisi" type="text" class="form-control" name="edisi" id="edisi"
-                            placeholder="Masukan Edisi">
+                    <div
+                        class="input-group input-group-outline my-3 @if ($errors->has('kata_kunci')) is-filled is-invalid @elseif ($kata_kunci) is-filled is-valid @endif">
+                        <label class="form-label">Kata Kunci</label>
+                        <input wire:model="kata_kunci" type="text" class="form-control" oninput="checkInput(this)" onfocus="focused(this)"
+                            onfocusout="defocused(this)" data-gtm-form-interact-field-id="3">
                     </div>
-                    <div class="input-group input-group-outline my-3">
-                        <input wire:model="kata_kunci" type="text" class="form-control" name="kata_kunci"
-                            id="kata_kunci" placeholder="Masukan Kata Kunci">
+                    <div
+                        class="input-group input-group-outline my-3 @if ($errors->has('bahasa')) is-filled is-invalid @elseif ($bahasa) is-filled is-valid @endif">
+                        <label class="form-label">Bahasa</label>
+                        <input wire:model="bahasa" type="text" class="form-control" oninput="checkInput(this)" onfocus="focused(this)"
+                            onfocusout="defocused(this)" data-gtm-form-interact-field-id="3">
                     </div>
-                    <div class="input-group input-group-outline my-3">
-                        <input wire:model="bahasa" type="text" class="form-control" name="bahasa" id="bahasa" placeholder="Masukan bahasa">
+                    <div
+                        class="input-group input-group-outline my-3 @if ($errors->has('isbn_issn')) is-filled is-invalid @elseif ($isbn_issn) is-filled is-valid @endif">
+                        <label class="form-label">ISBN / ISSN</label>
+                        <input wire:model="isbn_issn" type="number" class="form-control" oninput="checkInput(this)" onfocus="focused(this)"
+                            onfocusout="defocused(this)" data-gtm-form-interact-field-id="3">
                     </div>
-                    <div class="input-group input-group-outline my-3">
-                        <input wire:model="isbn_issn" type="number" class="form-control" name="isbn_issn" id="isbn_issn"
-                            placeholder="Masukan ISBN / ISSN">
+                    <div
+                        class="input-group input-group-outline my-3 @if ($errors->has('halaman')) is-filled is-invalid @elseif ($halaman) is-filled is-valid @endif">
+                        <label class="form-label">Halaman</label>
+                        <input wire:model="halaman" type="number" class="form-control" oninput="checkInput(this)" onfocus="focused(this)"
+                            onfocusout="defocused(this)" data-gtm-form-interact-field-id="3">
                     </div>
-                    <div class="input-group input-group-outline my-3">
-                        <input wire:model="halaman" type="text" class="form-control" name="halaman" id="halaman"
-                            placeholder="Masukan Halaman">
+                    <div
+                        class="input-group input-group-outline my-3 @if ($errors->has('tahun_terbit')) is-filled is-invalid @elseif ($tahun_terbit) is-filled is-valid @endif">
+                        <label class="form-label">Tahun Terbit</label>
+                        <input wire:model="tahun_terbit" type="number" class="form-control" oninput="checkInput(this)"
+                            onfocus="focused(this)" onfocusout="defocused(this)" data-gtm-form-interact-field-id="3">
                     </div>
-                    <div class="input-group input-group-outline my-3">
-                        <input wire:model="tahun_terbit" type="number" class="form-control" name="tahun_terbit"
-                            id="tahun_terbit" placeholder="Masukan Tahun Terbit">
+                    <div
+                        class="input-group input-group-outline my-3 @if ($errors->has('kota_terbit')) is-filled is-invalid @elseif ($kota_terbit) is-filled is-valid @endif">
+                        <label class="form-label">Kota Terbit</label>
+                        <input wire:model="kota_terbit" type="text" class="form-control" oninput="checkInput(this)" onfocus="focused(this)"
+                            onfocusout="defocused(this)" data-gtm-form-interact-field-id="3">
                     </div>
-                    <div class="input-group input-group-outline my-3">
-                        <input wire:model="kota_terbit" type="text" class="form-control" name="kota_terbit"
-                            id="kota_terbit" placeholder="Masukan Kota Terbit">
+                    <div
+                        class="input-group input-group-outline my-3 @if ($errors->has('penerbit')) is-filled is-invalid @elseif ($penerbit) is-filled is-valid @endif">
+                        <label class="form-label">Penerbit</label>
+                        <input wire:model="penerbit" type="text" class="form-control" oninput="checkInput(this)" onfocus="focused(this)"
+                            onfocusout="defocused(this)" data-gtm-form-interact-field-id="3">
                     </div>
-                    <div class="input-group input-group-outline my-3">
-                        <input wire:model="penerbit" type="text" class="form-control" name="penerbit" id="penerbit"
-                            placeholder="Masukan Penerbit">
+                    <div
+                        class="input-group input-group-outline my-3 @if ($errors->has('pengarang')) is-filled is-invalid @elseif ($pengarang) is-filled is-valid @endif">
+                        <label class="form-label">Pengarang</label>
+                        <input wire:model="pengarang" type="text" class="form-control" oninput="checkInput(this)" onfocus="focused(this)"
+                            onfocusout="defocused(this)" data-gtm-form-interact-field-id="3">
                     </div>
-                    <div class="input-group input-group-outline my-3">
-                        <input wire:model="pengarang" type="text" class="form-control" name="pengarang" id="pengarang"
-                            placeholder="Masukan Pengarang">
+                    <div
+                        class="input-group input-group-outline my-3 @if ($errors->has('abstrak')) is-filled is-invalid @elseif ($abstrak) is-filled is-valid @endif">
+                        <label class="form-label">Abstrak</label>
+                        <textarea wire:model="abstrak" type="text" cols="5" rows="5" class="form-control" oninput="checkInput(this)"
+                            onfocus="focused(this)" onfocusout="defocused(this)" data-gtm-form-interact-field-id="3"></textarea>
                     </div>
-                    <div class="input-group input-group-outline my-3">
-                        <textarea wire:model='abstrak' class="form-control" name="abstrak" id="abstrak" cols="15"
-                            rows="5" placeholder="Masukan Abstrak"></textarea>
-                    </div>
-                    <div class="input-group input-group-outline my-3">
-                        <input wire:model="url" type="text" class="form-control" name="url" id="url"
-                            placeholder="Contoh: https://www.google.com">
+                    <div
+                        class="input-group input-group-outline my-3 @if ($errors->has('url')) is-filled is-invalid @elseif ($url) is-filled is-valid @endif">
+                        <label class="form-label">Website</label>
+                        <input wire:model="url" type="text" class="form-control" oninput="checkInput(this)" onfocus="focused(this)"
+                            onfocusout="defocused(this)" data-gtm-form-interact-field-id="3">
                     </div>
                     <label class="text-sm mb-0" for="cover">Pilih File</label>
                     <div class="input-group input-group-outline my-1">
@@ -212,14 +268,14 @@
                         </div>
                     </div>
                     @error('cover') <span class="text-danger text-xs font-weight-light">{{ $message }}</span><br> @enderror
-                    <label class="text-sm mb-0 my-2" for="cover">Cover Buku :</label><br>
+                    {{-- <label class="text-sm mb-0 my-2" for="cover">Cover Buku :</label><br>
                     <div class="w-25 border-radius-sm shadow-sm">
                         @if (isset($books->cover) && $books->cover != '')
                             <img src="{{ asset('storage/'.$books->cover) }}" width="150px">
                         @else
                             <img src="{{ asset('img/cover-not-found.jpg') }}" width="120px">
                         @endif
-                    </div>
+                    </div> --}}
                     <div style="float: right;" class="border-0 mt-3">
                         <button type="button" class="btn btn-danger" wire:click="closeModal"
                             data-bs-dismiss="modal">Batal</button>

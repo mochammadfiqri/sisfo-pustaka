@@ -27,7 +27,7 @@
             </ul>
             <ul class="navbar-nav d-lg-flex d-none">
                 <li class="nav-item d-flex align-items-center">
-                    <a class="btn btn-outline-primary btn-sm mb-0 me-2" target="_blank" href="#">Back To Website</a>
+                    <a class="btn btn-outline-primary btn-sm mb-0 me-2" href="/">Back To Website</a>
                 </li>
             </ul>
         </div>
