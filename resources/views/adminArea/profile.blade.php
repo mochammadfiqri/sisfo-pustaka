@@ -11,10 +11,10 @@
                 <span class="mask  bg-gradient-primary  opacity-6"></span>
             </div>
             <div class="card card-body mx-3 mx-md-4 mt-n6">
-                <div class="row gx-4 mb-2">
+                <div class="row gx-4 mb-2"> 
                     <div class="col-auto">
                         <div class="avatar avatar-xl position-relative">
-                            <img src="../assets/img/bruce-mars.jpg" alt="profile_image"
+                            <img src="{{ asset('img/marie.jpg') }}" alt="profile_image"
                                 class="w-100 border-radius-lg shadow-sm">
                         </div>
                     </div>

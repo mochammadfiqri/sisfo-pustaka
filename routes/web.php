@@ -64,7 +64,7 @@ Route::middleware('auth')->group(function() {
     
     Route::middleware('only_member')->group(function() {
         Route::get('/profile-member', [ProfileController::class, 'indexMember'])->name('profileMember');
-        // Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboardMember');
+        Route::get('/dashboard-member', [DashboardController::class, 'indexMember'])->name('dashboardMember');
         Route::get('/daftarbuku', [BookListController::class, 'index'])->name('daftarbuku');
         // Route::get('/member_area', Member::class);
     });

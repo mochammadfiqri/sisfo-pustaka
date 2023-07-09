@@ -48,7 +48,12 @@ class IndexUsers extends Component
     }
 
     public function deleteUser() {
-        User::find($this->userId)->delete();
+        $user = User::find($this->userId);
+        if ($user) {
+            $user->delete();
+            $user->status = 'inactive';
+            $user->save();
+        }
         $this->dispatchBrowserEvent('close-modal', ['message' => 'User berhasil dihapus!']);
     }
 

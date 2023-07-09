@@ -6,13 +6,12 @@
             <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
                 <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
                     <h6 class="text-white text-uppercase ps-3">
-                        Peminjaman Buku
+                        History Peminjaman Buku
                         <!-- Button trigger modal -->
                         <button type="button" class="btn bg-gradient-success btn-sm float-end me-1"
                             data-bs-toggle="modal" data-bs-target="#addbookrent" data-te-ripple-init
                             data-te-ripple-color="light">
                             <span>Tambah Peminjaman</span>
-                            <span class="badge badge-xs badge-circle border border-1 ms-1">4</span>
                         </button>
                         {{-- <button type="button" class="btn bg-gradient-success btn-sm float-end me-1"
                             data-bs-toggle="modal" data-bs-target="#deletedUsers" data-te-ripple-init
@@ -37,7 +36,8 @@
                     </div>
                 </div>
                 <div class="table-responsive p-0">
-                    {{-- @include('livewire.admin-area.table-users') --}}
+                    {{-- @include('livewire.admin-area.table-peminjaman') --}}
+                    <x-rent-log-table :rentlog='$rentLogs' />
                 </div>
             </div>
         </div>
