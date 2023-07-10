@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BookListController;
 use App\Http\Controllers\BookRentController;
+use App\Http\Controllers\BookReturnController;
 use App\Http\Livewire\MemberArea\Member;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\DetailController;
@@ -50,6 +51,9 @@ Route::middleware('auth')->group(function() {
         Route::get('/kategori-buku', [CategoryController::class, 'index'])->name('kategori');
 
         Route::get('/peminjaman-buku', [BookRentController::class, 'index'])->name('peminjamanBuku');
+
+        Route::get('/get-user-books/{id}', [BookReturnController::class, 'getUserBooks']);
+        Route::get('/pengembalian-buku', [BookReturnController::class, 'index'])->name('pengembalianBuku');
 
         // Route::get('/users', IndexUsers::class)->name('users')->middleware(['only_admin']);
         Route::get('/users', [UsersController::class, 'index'])->name('users');

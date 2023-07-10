@@ -67,7 +67,9 @@ class IndexPeminjaman extends Component
     {
         $users = User::where('role_id', '!=', '1')->where('status', '!=', 'inactive')->get();
         $books = Book::all();
-        $rentLogs = RentLogs::with(['user', 'book'])->get();
+        $rentLogs = RentLogs::with(['user', 'book'])
+            ->where('actual_return_date', null)
+            ->get();
 
         return view('livewire.admin-area.index-peminjaman', [
             'users' => $users,

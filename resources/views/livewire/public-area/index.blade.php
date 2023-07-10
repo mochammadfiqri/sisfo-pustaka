@@ -449,7 +449,7 @@
         <!-- End Portfolio Section -->
     
         <!-- ======= Team Section ======= -->
-        <section id="team" class="team section-bg">
+        {{-- <section id="team" class="team section-bg">
             <div class="container" data-aos="fade-up">
     
                 <div class="section-title">
@@ -533,10 +533,11 @@
                 </div>
     
             </div>
-        </section><!-- End Team Section -->
+        </section> --}}
+        <!-- End Team Section -->
     
         <!-- ======= Pricing Section ======= -->
-        <section id="pricing" class="pricing">
+        <section id="booklist" class="booklist">
             <div class="container" data-aos="fade-up">
     
                 <div class="section-title">
@@ -602,7 +603,7 @@
         </section><!-- End Pricing Section -->
     
         <!-- ======= Frequently Asked Questions Section ======= -->
-        <section id="faq" class="faq section-bg">
+        {{-- <section id="faq" class="faq section-bg">
             <div class="container" data-aos="fade-up">
     
                 <div class="section-title">
@@ -697,7 +698,8 @@
                 </div>
     
             </div>
-        </section><!-- End Frequently Asked Questions Section -->
+        </section> --}}
+        <!-- End Frequently Asked Questions Section -->
     
         <!-- ======= Contact Section ======= -->
         {{-- <section id="contact" class="contact">

@@ -1,22 +1,23 @@
 <div class="row">
     @include('sweetalert::alert')
-    @include('livewire.admin-area.modal-peminjaman')
+    @include('livewire.admin-area.modal-pengembalian')
     <div class="col-12">
         <div class="card my-2">
             <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
                 <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
                     <h6 class="text-white text-uppercase ps-3">
-                        History Peminjaman Buku
+                        History Pengembalian Buku
                         <!-- Button trigger modal -->
-                        <button type="button" class="btn bg-gradient-success btn-sm float-end me-1" data-bs-toggle="modal"
-                            data-bs-target="#registeredUsers" data-te-ripple-init data-te-ripple-color="light">
-                            <span>Approve Peminjaman</span>
+                        <button type="button" class="btn bg-gradient-success btn-sm float-end me-1"
+                            data-bs-toggle="modal" data-bs-target="#apporveBookReturn" data-te-ripple-init
+                            data-te-ripple-color="light">
+                            <span>Approve Pengembalian</span>
                             <span class="badge badge-xs badge-circle border border-1 ms-1">4</span>
                         </button>
                         <button type="button" class="btn bg-gradient-success btn-sm float-end me-1"
-                            data-bs-toggle="modal" data-bs-target="#addbookrent" data-te-ripple-init
+                            data-bs-toggle="modal" data-bs-target="#addbookreturn" data-te-ripple-init
                             data-te-ripple-color="light">
-                            <span>Tambah Peminjaman</span>
+                            <span>Tambah Pengembalian</span>
                         </button>
                     </h6>
                 </div>
@@ -35,8 +36,8 @@
                     </div>
                 </div>
                 <div class="table-responsive p-0">
-                    {{-- @include('livewire.admin-area.table-peminjaman') --}}
                     <x-rent-log-table :rentlog='$rentLogs' />
+                    {{-- @include('livewire.admin-area.table-pengembalian') --}}
                 </div>
             </div>
         </div>
