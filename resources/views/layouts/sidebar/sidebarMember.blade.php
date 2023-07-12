@@ -16,21 +16,15 @@
             <li class="nav-item mb-2 mt-0">
                 <a data-bs-toggle="collapse" href="#ProfileNav" class="nav-link text-white" aria-controls="ProfileNav"
                     role="button" aria-expanded="false">
-                    <img src="{{ asset('img/myfoto.jpeg') }}" class="avatar">
+                    <img src="{{ asset('img/user.png') }}" class="avatar">
                     <span class="nav-link-text ms-2 ps-1 text-uppercase">{{ Auth::user()->username }}</span>
                 </a>
                 <div class="collapse" id="ProfileNav" style="">
                     <ul class="nav ">
                         <li class="nav-item">
-                            <a href="/profile-admin" class="nav-link text-white {{ request()->routeIs('profile-admin') ? 'active' : '' }}">
+                            <a href="/profile_anggota" class="nav-link text-white {{ request()->routeIs('profile-admin') ? 'active' : '' }}">
                                 <span class="material-icons-round">person</span>
                                 <span class="sidenav-normal ms-3 ps-1">My Profile</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white " href="../../pages/pages/account/settings.html">
-                                <span class="material-icons-round">settings</span>
-                                <span class="sidenav-normal ms-3 ps-1">Settings</span>
                             </a>
                         </li>
                         <li class="nav-item">
@@ -51,7 +45,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="/daftarbuku" class="nav-link text-white {{ request()->routeIs('daftarbuku') ? 'active' : '' }}" aria-controls="catalogExamples"
+                <a href="/daftar_buku" class="nav-link text-white {{ request()->routeIs('daftarbuku') ? 'active' : '' }}" aria-controls="catalogExamples"
                     role="button" aria-expanded="false">
                     <i class="material-icons-round opacity-10">book</i>
                     <span class="nav-link-text ms-2 ps-1">Daftar Buku</span>
@@ -65,21 +59,21 @@
                 </a>
             </li> --}}
             <li class="nav-item">
-                <a href="#" class="nav-link text-white" aria-controls="dashboardsExamples"
+                <a href="/peminjaman_buku_anggota" class="nav-link text-white" aria-controls="dashboardsExamples"
                     role="button" aria-expanded="false">
                     <i class="material-icons-round opacity-10">credit_score</i>
                     <span class="nav-link-text ms-2 ps-1">Peminjaman Buku</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a href="#" class="nav-link text-white" aria-controls="dashboardsExamples"
+                <a href="/pengembalian_buku_anggota" class="nav-link text-white" aria-controls="dashboardsExamples"
                     role="button" aria-expanded="false">
                     <i class="material-icons-round opacity-10">assignment_return</i>
                     <span class="nav-link-text ms-2 ps-1">Pengembalian Buku</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a href="#" class="nav-link text-white" aria-controls="dashboardsExamples"
+                <a href="/laporan_perpus_anggota" class="nav-link text-white" aria-controls="dashboardsExamples"
                     role="button" aria-expanded="false">
                     <i class="material-icons-round opacity-10">summarize</i>
                     <span class="nav-link-text ms-2 ps-1">Laporan Perpustakaan</span>
@@ -105,7 +99,7 @@
                 <div class="collapse" id="dashboardsExamples">
                     <ul class="nav ">
                         <li class="nav-item active">
-                            <a class="nav-link text-white active" href="../../pages/dashboards/analytics.html">
+                            <a class="nav-link text-white active" href="/setting_akun_anggota">
                                 <i class="material-icons-round opacity-10">manage_accounts</i>
                                 <span class="nav-link-text ms-2 ps-1">Manage Account</span>
                             </a>

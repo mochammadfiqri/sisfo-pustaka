@@ -13,7 +13,7 @@
         <div class="row justify-content-center align-items-center">
             <div class="col-auto">
                 <div class="avatar avatar-xl position-relative">
-                    <img src="http://127.0.0.1:8000/img/marie.jpg" alt="profile_image"
+                    <img src="{{ asset('img/user.png') }}" alt="profile_image"
                         class="w-100 border-radius-lg shadow-sm">
                 </div>
             </div>

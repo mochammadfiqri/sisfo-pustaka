@@ -26,20 +26,4 @@ class DashboardController extends Controller
         ]);
     }
 
-    public function indexMember()
-    {
-        // $bookCount = Book::count();
-        // $userCount = User::count();
-        // $categoryCount = Category::count();
-        $RentBookCount = RentLogs::count();
-        $rentLogs = RentLogs::with(['user', 'book'])->where('user_id', Auth::user()->id)->get();
-
-        return view('memberArea.dashboard', [
-            // 'book_count' => $bookCount,
-            // 'user_count' => $userCount,
-            // 'category_count' => $categoryCount,
-            'RentBookCount' => $RentBookCount,
-            'rentLogs' => $rentLogs
-        ]);
-    }
 }

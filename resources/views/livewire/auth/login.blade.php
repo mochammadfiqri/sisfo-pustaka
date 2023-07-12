@@ -61,8 +61,8 @@
                                         <input type="password" name="password" id="password" class="form-control" placeholder="Password" required>
                                     </div>
                                     <div class="form-check form-switch d-flex align-items-center mb-3">
-                                        <input class="form-check-input" type="checkbox" id="rememberMe" checked>
-                                        <label class="form-check-label mb-0 ms-3" for="rememberMe">Remember me</label>
+                                        <input class="form-check-input" type="checkbox" id="showpassword">
+                                        <label class="form-check-label mb-0 ms-3" for="showpassword">Lihat Password</label>
                                     </div>
                                     <div class="text-center">
                                         <button type="submit" class="btn bg-gradient-primary w-100 my-4 mb-2">Sign in</button>
@@ -81,6 +81,18 @@
         </div>
     </main>
     @include('components.partials.javascript')
+    <script>
+        const passwordInput = document.getElementById('password');
+        const showPasswordCheckbox = document.getElementById('showpassword');
+    
+        showPasswordCheckbox.addEventListener('change', function() {
+            if (this.checked) {
+                passwordInput.type = 'text';
+            } else {
+                passwordInput.type = 'password';
+            }
+        });
+    </script>
 </body>
 
 </html>
