@@ -23,7 +23,7 @@ class IndexPeminjaman extends Component
         $book = Book::findOrFail($this->book_id)->only('status');
         if($book['status'] != 'in stock') {
             $this->resetInput();
-            return redirect('/peminjaman-buku')->with('toast_error', 'Tidak dapat meminjam, Buku tidak tersedia');
+            return redirect('/peminjaman_buku')->with('toast_error', 'Tidak dapat meminjam, Buku tidak tersedia');
             // $this->dispatchBrowserEvent('close-modal', ['message' => 'Buku berhasil dihapus!']);
             // dd('buku sedang di pinjam');
 
@@ -44,7 +44,7 @@ class IndexPeminjaman extends Component
                     $book->status = 'not available';
                     $book->save();
                     DB::commit();
-                    return redirect('/peminjaman-buku')->with('toast_success', 'Buku berhasil dipinjam');
+                    return redirect('/peminjaman_buku')->with('toast_success', 'Buku berhasil dipinjam');
                 } catch (\Throwable $th) {
                     DB::rollBack();
                 }

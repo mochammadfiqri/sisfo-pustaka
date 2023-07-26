@@ -1,19 +1,22 @@
 <?php
 
+use App\Models\User;
+use Illuminate\Support\Str;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\BookListController;
-use App\Http\Controllers\BookRentController;
-use App\Http\Controllers\BookReturnController;
-use App\Http\Livewire\MemberArea\Member;
+use Illuminate\Support\Facades\Password;
 use App\Http\Controllers\UsersController;
+use Illuminate\Auth\Events\PasswordReset;
 use App\Http\Controllers\DetailController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\CatalogController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\WebsiteController;
+use App\Http\Controllers\BookRentController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\BookReturnController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,8 +36,54 @@ use App\Http\Controllers\DashboardController;
 Route::middleware('only_guest')->group(function() {
     Route::get('login', [AuthController::class, 'login'])->name('login');
     Route::post('login', [AuthController::class, 'authenticate']);
+
     Route::get('register', [AuthController::class, 'register']);
     Route::post('register', [AuthController::class, 'registerProcess']);
+    
+    Route::get('forgot-password', [AuthController::class, 'forgotPassword']);
+    Route::post('forgot-password', [AuthController::class, 'sendResetLinkEmail'])->name('password.email');
+
+    // Route::post('/forgot-password', function (Request $request) {
+    // $request->validate(['email' => 'required|email']);
+
+    //     $status = Password::sendResetLink(
+    //         $request->only('email')
+    //     );
+
+    //     return $status === Password::RESET_LINK_SENT
+    //         ? back()->with('toast_success', 'Password reset link sent successfully')
+    //         : back()->with('toast_error', 'Email tidak ditemukan !');
+    // })->name('password.email');
+
+    // Route::get('/reset-password/{token}', function (string $token) {
+    //     return view('adminArea.auth.reset-password', ['token' => $token]);
+    // })->name('password.reset');
+    // Route::post('/reset-password', [AuthController::class, 'resetPassword'])->name('password.update');
+
+    // Route::post('/reset-password', function (Request $request) {
+    //     $request->validate([
+    //     'token'    => 'required',
+    //     'email'    => 'required|email',
+    //     'password' => 'required|min:8|confirmed',
+    // ]);
+
+    // $status = Password::reset(
+    //     $request->only('email', 'password', 'password_confirmation', 'token'),
+    //     function (User $user, string $password) {
+    //         $user->forceFill([
+    //             'password' => Hash::make($password),
+    //         ])->setRememberToken(Str::random(60));
+
+    //         $user->save();
+
+    //         event(new PasswordReset($user));
+    //     }
+    // );
+
+    // return $status === Password::PASSWORD_RESET
+    //     ? redirect()->route('login')->with('toast_success', 'Password berhasil diganti !')
+    //     : back()->with('toast_error', 'Masukan Password dengan benar !');
+    // })->name('password.update');
     
     Route::get('/', function () {
         // return redirect('/login');

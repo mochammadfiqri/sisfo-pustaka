@@ -15,7 +15,7 @@
         <div class="row">
             <div class="col-12">
                 <!-- Navbar -->
-                @include('livewire.auth.navbar')
+                @include('adminArea.auth.navbar')
                 <!-- End Navbar -->
             </div>
         </div>
@@ -54,11 +54,21 @@
                             <div class="card-body">
                                 <form action="" method="POST" role="form" class="text-start">
                                     @csrf
-                                    <div class="input-group input-group-outline my-3">
+                                    {{-- <div class="input-group input-group-outline my-3">
                                         <input type="text" name="username" id="username" class="form-control" placeholder="Username" required>
+                                    </div> --}}
+                                    <div class="input-group input-group-outline mt-0 mb-3">
+                                        <label class="form-label">Username</label>
+                                        <input type="text" name="username" id="username" class="form-control" oninput="checkInput(this)"
+                                            onfocus="focused(this)" onfocusout="defocused(this)" required>
                                     </div>
-                                    <div class="input-group input-group-outline mb-3">
+                                    {{-- <div class="input-group input-group-outline mb-3">
                                         <input type="password" name="password" id="password" class="form-control" placeholder="Password" required>
+                                    </div> --}}
+                                    <div class="input-group input-group-outline mt-0 mb-3">
+                                        <label class="form-label">Password</label>
+                                        <input type="password" name="password" id="password" class="form-control" oninput="checkInput(this)"
+                                            onfocus="focused(this)" onfocusout="defocused(this)" required>
                                     </div>
                                     <div class="form-check form-switch d-flex align-items-center mb-3">
                                         <input class="form-check-input" type="checkbox" id="showpassword">
@@ -67,8 +77,11 @@
                                     <div class="text-center">
                                         <button type="submit" class="btn bg-gradient-primary w-100 my-4 mb-2">Sign in</button>
                                     </div>
-                                    <p class="mt-4 text-sm text-center">
-                                        Don't have an account?
+                                    <p class="mt-2 text-sm text-center">
+                                        <a href="forgot-password" class="text-primary text-gradient font-weight-bold">Lupa Password?</a>
+                                    </p>
+                                    <p class="mt-2 text-sm text-center">
+                                        Belum Punya Akun ?
                                         <a href="register" class="text-primary text-gradient font-weight-bold">Sign up</a>
                                     </p>
                                 </form>
@@ -92,6 +105,50 @@
                 passwordInput.type = 'password';
             }
         });
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const inputs = document.querySelectorAll('.form-control');
+    
+            inputs.forEach(function (input) {
+                const div = input.parentNode;
+                const errorElement = div.querySelector('.text-danger');
+    
+                // Check initial input value
+                if (input.value.trim() !== '') {
+                    div.classList.add('is-filled');
+                    if (input.checkValidity() && !errorElement) {
+                        div.classList.add('is-valid');
+                    }
+                }
+    
+                // Check input on focusout
+                input.addEventListener('focusout', function () {
+                    if (input.value.trim() !== '') {
+                        div.classList.add('is-filled');
+                        if (input.checkValidity() && !errorElement) {
+                            div.classList.add('is-valid');
+                            div.classList.remove('is-invalid');
+                        } else {
+                            div.classList.remove('is-valid');
+                            div.classList.add('is-invalid');
+                        }
+                    } else {
+                        div.classList.remove('is-filled');
+                        div.classList.remove('is-valid');
+                        div.classList.remove('is-invalid');
+                    }
+                });
+            });
+        });
+    
+        function focused(input) {
+            input.parentNode.classList.add('is-focused');
+        }
+    
+        function defocused(input) {
+            input.parentNode.classList.remove('is-focused');
+        }
     </script>
 </body>
 

@@ -75,8 +75,8 @@
             <li class="nav-item">
                 <a href="/laporan_perpus" class="nav-link text-white" aria-controls="dashboardsExamples"
                     role="button" aria-expanded="false">
-                    <i class="material-icons-round opacity-10">summarize</i>
-                    <span class="nav-link-text ms-2 ps-1">Laporan Perpustakaan</span>
+                    <i class="material-icons-round opacity-10">print</i>
+                    <span class="nav-link-text ms-2 ps-1">Cetak Laporan</span>
                 </a>
             </li>
             <li class="nav-item">

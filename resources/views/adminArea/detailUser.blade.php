@@ -67,18 +67,34 @@
                     <h5>Basic Info</h5>
                 </div>
                 <div class="card-body pt-0">
-                    <div class="row">
+                    <div class="row mb-2">
                         <div class="col-6">
                             <div class="input-group input-group-static">
-                                <label>First Name</label>
-                                <input type="text" class="form-control" placeholder="Alec" onfocus="focused(this)"
+                                <label>Username</label>
+                                <input type="text" class="form-control" placeholder="{{ $user->username }}" onfocus="focused(this)"
                                     onfocusout="defocused(this)">
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="input-group input-group-static">
-                                <label>Last Name</label>
-                                <input type="text" class="form-control" placeholder="Thompson" onfocus="focused(this)"
+                                <label>Password</label>
+                                <input type="text" class="form-control" placeholder=" " onfocus="focused(this)"
+                                    onfocusout="defocused(this)">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="input-group input-group-static">
+                                <label>No. Handphone</label>
+                                <input type="text" class="form-control" placeholder="{{ $user->no_hp }}" onfocus="focused(this)"
+                                    onfocusout="defocused(this)">
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="input-group input-group-static">
+                                <label>Alamat</label>
+                                <input type="text" class="form-control" placeholder="{{ $user->alamat }}" onfocus="focused(this)"
                                     onfocusout="defocused(this)">
                             </div>
                         </div>

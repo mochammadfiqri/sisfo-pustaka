@@ -31,10 +31,10 @@ class IndexPengembalian extends Component
             $book->save();
 
             $this->resetInput();
-            return redirect('/pengembalian-buku')->with('toast_success', 'Buku berhasil dikembalikan');
+            return redirect('/pengembalian_buku')->with('toast_success', 'Buku berhasil dikembalikan');
         } else {
             $this->resetInput();
-            return redirect('/pengembalian-buku')->with('toast_error', 'Buku tidak berhasil dikembalikan');
+            return redirect('/pengembalian_buku')->with('toast_error', 'Buku tidak berhasil dikembalikan');
         }
     }
 

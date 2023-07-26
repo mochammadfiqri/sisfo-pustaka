@@ -25,7 +25,7 @@
                     </a>
                 </li>
             </ul>
-            <ul class="navbar-nav d-lg-flex d-none">
+            <ul class="navbar-nav float-end">
                 <li class="nav-item d-flex align-items-center">
                     <a class="btn btn-outline-primary btn-sm mb-0 me-2" href="/">Back To Website</a>
                 </li>
