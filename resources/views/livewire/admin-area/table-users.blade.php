@@ -39,6 +39,8 @@
                     <a href="users/detail/{{ $data->id }}" type="button" class="btn btn-info btn-sm mt-3">Detail</a>
                     {{-- <a href="#" type="button" class="btn btn-primary btn-sm mt-3">Nonaktifkan</a> --}}
                     <button data-bs-target="#removeUser" data-bs-toggle="modal" wire:click="removeUser({{ $data->id }})" class="btn btn-primary btn-sm mt-3">Delete User</button>
+                    <button type="button" data-bs-toggle="modal" data-bs-target="#changePassword" wire:click='editPassword({{ $data->id }})'
+                        class="btn btn-warning btn-sm mt-3">Update Password</button>
                 </td>
             </tr>
             @endforeach

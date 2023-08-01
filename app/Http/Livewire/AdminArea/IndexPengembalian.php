@@ -12,6 +12,8 @@ class IndexPengembalian extends Component
 {
     public $user_id = [];
     public $book_id = [];
+    public $search;
+    public $paginate = 5;
 
     public function addBookReturn()
     {
@@ -49,14 +51,31 @@ class IndexPengembalian extends Component
         $this->resetInput();
     }
 
-    public function render()
-    {
-        $users = User::where('role_id', '!=', '1')->where('status', '!=', 'inactive')->get();
-        $books = Book::all();
+    public function render() {
+        $users = User::where('role_id', '!=', '1')
+            ->where('status', '!=', 'inactive')
+            ->when($this->search, function ($query, $search) {
+                return $query->where('username', 'LIKE', '%' . $search . '%');
+            })
+            ->paginate($this->paginate); // Updated from $this->perPage to $this->paginate
+
+        $books = Book::when($this->search, function ($query, $search) {
+            return $query->where('judul', 'LIKE', '%' . $search . '%');
+        })
+            ->paginate($this->paginate); // Updated from $this->perPage to $this->paginate
         $rentLogs = RentLogs::with(['user', 'book'])
-            ->orWhereNotNull('actual_return_date')
-            ->get();
-        
+            ->where('actual_return_date', null)
+            ->when($this->search, function ($query, $search) {
+                return $query->where('rent_date', 'LIKE', '%' . $search . '%')
+                    ->orWhere('return_date', 'LIKE', '%' . $search . '%')
+                    ->orWhereHas('user', function ($query) use ($search) {
+                        $query->where('username', 'LIKE', '%' . $search . '%');
+                    })->orWhereHas('book', function ($query) use ($search) {
+                        $query->where('judul', 'LIKE', '%' . $search . '%');
+                    });
+            })
+            ->paginate($this->paginate);
+
         return view('livewire.admin-area.index-pengembalian', [
             'users' => $users,
             'books' => $books,

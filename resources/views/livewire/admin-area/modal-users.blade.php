@@ -169,3 +169,33 @@
         </div>
     </div>
 </div>
+
+<!-- Update Modal Category -->
+<div wire:ignore.self class="modal fade" id="changePassword" data-bs-backdrop="static" data-bs-keyboard="false"
+    tabindex="-1" aria-labelledby="changePasswordLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title font-weight-normal" id="changePasswordLabel">Update Password</h5>
+                <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form wire:submit.prevent="updatePassword">
+                <div class="modal-body">
+                    <div
+                        class="input-group input-group-outline mt-0 mb-3 @if ($errors->has('newPassword')) is-filled is-invalid @elseif ($newPassword) is-filled is-valid @endif">
+                        <label class="form-label">Password Baru</label>
+                        <input wire:model="newPassword" type="password" class="form-control" oninput="checkInput(this)"
+                            onfocus="focused(this)" onfocusout="defocused(this)">
+                    </div>
+                    <div style="float: right;" class="border-0">
+                        <button type="button" class="btn btn-danger" wire:click="closeModal"
+                            data-bs-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-success">Update</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

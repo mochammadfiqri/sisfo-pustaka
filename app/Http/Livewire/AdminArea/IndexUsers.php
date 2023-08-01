@@ -3,8 +3,9 @@
 namespace App\Http\Livewire\AdminArea;
 
 use App\Models\User;
-use Livewire\WithPagination;
 use Livewire\Component;
+use Livewire\WithPagination;
+use Illuminate\Support\Facades\Hash;
 
 class IndexUsers extends Component
 {
@@ -15,6 +16,32 @@ class IndexUsers extends Component
     public $search;
     public $userId;
     public $statusSelected;
+    public $oldPassword, $newPassword, $confirmPassword;
+
+    public function updatePassword()
+    {
+        $user = User::findOrFail($this->userId);
+
+        $user->update([
+            'password' => Hash::make($this->newPassword),
+        ]);
+
+        // dd('ganti pas');
+        
+        $this->resetInput();
+        return redirect('/users')->with('toast_success', 'Password berhasil diupdate!');
+    }
+
+    public function editPassword(int $userId)
+    {
+        $this->userId = $userId;
+    }
+    
+    private function resetForm()
+    {
+        $this->newPassword = '';
+        $this->confirmPassword = '';
+    }
 
     protected function rules()
     {
@@ -70,6 +97,15 @@ class IndexUsers extends Component
         $user = User::withTrashed()->where('id', $userId)->first();
         $user->restore();
         $this->dispatchBrowserEvent('close-modal', ['message' => 'User berhasil direstore!']);
+    }
+
+    public function resetInput() {
+        $this->newPassword = '';
+
+    }
+    public function closeModal()
+    {
+        $this->resetInput();
     }
 
     public function render()

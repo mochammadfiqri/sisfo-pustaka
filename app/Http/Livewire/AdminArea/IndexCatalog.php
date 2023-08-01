@@ -7,8 +7,6 @@ use Livewire\Component;
 use App\Models\Category;
 use Livewire\WithPagination;
 use Livewire\WithFileUploads;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Validation\Rule;
 
 class IndexCatalog extends Component
 {
@@ -21,6 +19,8 @@ class IndexCatalog extends Component
     public $categories = [];
     public $paginate = 5;
     public $search;
+    public $filterStatus = [];
+    public $filterCategory = [];
 
     protected function rules()
     {
@@ -191,7 +191,6 @@ class IndexCatalog extends Component
         $this->dispatchBrowserEvent('close-modal', ['message' => 'Buku berhasil dihapus!']);
 
     }
-
 
     private function resetInput()
     {

@@ -19,9 +19,9 @@ class IndexDaftarBuku extends Component
         $books = Book::query();
 
         if (!empty($this->filtercategory)) {
-            $books->whereHas('categories', function ($query) {
-            $query->whereIn('categories.id', $this->filtercategory);
-        });
+                $books->whereHas('categories', function ($query) {
+                $query->whereIn('categories.id', $this->filtercategory);
+            });
         }
 
         if ($this->search) {

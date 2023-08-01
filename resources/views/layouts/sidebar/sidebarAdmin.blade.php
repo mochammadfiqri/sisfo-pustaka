@@ -72,13 +72,13 @@
                     <span class="nav-link-text ms-2 ps-1">Pengembalian Buku</span>
                 </a>
             </li>
-            <li class="nav-item">
+            {{-- <li class="nav-item">
                 <a href="/laporan_perpus" class="nav-link text-white" aria-controls="dashboardsExamples"
-                    role="button" aria-expanded="false">
+                    role="button" aria-expanded="false" data-bs-toggle="modal" data-bs-target="#printReport">
                     <i class="material-icons-round opacity-10">print</i>
                     <span class="nav-link-text ms-2 ps-1">Cetak Laporan</span>
                 </a>
-            </li>
+            </li> --}}
             <li class="nav-item">
                 <hr class="horizontal light">
                 <h6 class="ps-4  ms-2 text-uppercase text-xs font-weight-bolder text-white">ACCOUNT</h6>

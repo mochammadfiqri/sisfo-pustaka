@@ -52,13 +52,6 @@
                 </a>
             </li>
             {{-- <li class="nav-item">
-                <a href="/kategori-buku" class="nav-link text-white {{ request()->routeIs('kategori') ? 'active' : '' }}" aria-controls="dashboardsExamples"
-                    role="button" aria-expanded="false">
-                    <i class="material-icons-round opacity-10">category</i>
-                    <span class="nav-link-text ms-2 ps-1">Kategori Buku</span>
-                </a>
-            </li> --}}
-            <li class="nav-item">
                 <a href="/peminjaman_buku_anggota" class="nav-link text-white" aria-controls="dashboardsExamples"
                     role="button" aria-expanded="false">
                     <i class="material-icons-round opacity-10">credit_score</i>
@@ -71,25 +64,11 @@
                     <i class="material-icons-round opacity-10">assignment_return</i>
                     <span class="nav-link-text ms-2 ps-1">Pengembalian Buku</span>
                 </a>
-            </li>
-            <li class="nav-item">
-                <a href="/laporan_perpus_anggota" class="nav-link text-white" aria-controls="dashboardsExamples"
-                    role="button" aria-expanded="false">
-                    <i class="material-icons-round opacity-10">summarize</i>
-                    <span class="nav-link-text ms-2 ps-1">Laporan Perpustakaan</span>
-                </a>
-            </li>
+            </li> --}}
             <li class="nav-item">
                 <hr class="horizontal light">
                 <h6 class="ps-4  ms-2 text-uppercase text-xs font-weight-bolder text-white">ACCOUNT</h6>
             </li>
-            {{-- <li class="nav-item">
-                <a href="#" class="nav-link text-white" aria-controls="dashboardsExamples"
-                    role="button" aria-expanded="false">
-                    <i class="material-icons-round opacity-10">groups_2</i>
-                    <span class="nav-link-text ms-2 ps-1">Daftar Pengunjung</span>
-                </a>
-            </li> --}}
             <li class="nav-item">
                 <a data-bs-toggle="collapse" href="#dashboardsExamples" class="nav-link text-white"
                     aria-controls="dashboardsExamples" role="button" aria-expanded="false">
@@ -104,12 +83,6 @@
                                 <span class="nav-link-text ms-2 ps-1">Manage Account</span>
                             </a>
                         </li>
-                        {{-- <li class="nav-item active">
-                            <a class="nav-link text-white active" href="../../pages/dashboards/analytics.html">
-                                <i class="material-icons-round opacity-10">settings_applications</i>
-                                <span class="nav-link-text ms-2 ps-1">Kelola Data<br> Perpustakaan</span>
-                            </a>
-                        </li> --}}
                     </ul>
                 </div>
             </li>

@@ -1,0 +1,19 @@
+{
+    "roboto": {
+        "300": "C:\\laragon\\www\\sisfo-pustaka\\storage\\fonts\/\/roboto_300_21960201651f2ea862182ff34dfd5ead",
+        "normal": "C:\\laragon\\www\\sisfo-pustaka\\storage\\fonts\/\/roboto_normal_9fa47a070a8b30b595086d70bb7ac78c",
+        "500": "C:\\laragon\\www\\sisfo-pustaka\\storage\\fonts\/\/roboto_500_d0dcda9e813eb9b854a1cc044831f6fe",
+        "bold": "C:\\laragon\\www\\sisfo-pustaka\\storage\\fonts\/\/roboto_bold_3d0ad20d45ace845335f9e6c390a09d9",
+        "900": "roboto_900_509a5e5b153550862359e315131088d5"
+    },
+    "roboto slab": {
+        "normal": "C:\\laragon\\www\\sisfo-pustaka\\storage\\fonts\/\/roboto_slab_normal_66c226b0b958d5c06535c8f5f7b169b5",
+        "bold": "roboto_slab_bold_3e8e362ce1132cec60474edd3bcb078b"
+    },
+    "open sans": {
+        "300": "C:\\laragon\\www\\sisfo-pustaka\\storage\\fonts\/\/open_sans_300_c71809dadd1d66d9409095b367397db3",
+        "normal": "C:\\laragon\\www\\sisfo-pustaka\\storage\\fonts\/\/open_sans_normal_58432f442db7592a77647319d9a050fa",
+        "600": "C:\\laragon\\www\\sisfo-pustaka\\storage\\fonts\/\/open_sans_600_9cc423d04ae7ffc0bddf21f1b769e623",
+        "bold": "open_sans_bold_9b93feee637c3c387cc32cdb0344a7df"
+    }
+}

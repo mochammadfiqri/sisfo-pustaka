@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\BooksExport;
+use Carbon\Carbon;
 use App\Models\Book;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Maatwebsite\Excel\Facades\Excel;
 
 class CatalogController extends Controller
 {
@@ -20,9 +24,8 @@ class CatalogController extends Controller
         ]);
     }
 
-    // public function add()
-    // {
-    //     $kategori = Category::all();
-    //     return view('adminArea.catalog', ['kategori' => $kategori]);
-    // }
+    public function printReport() {
+        $books = Book::with('categories')->get();
+        return Excel::download(new BooksExport($books), 'rekap_buku_' . Carbon::now()->timestamp . '.xlsx');
+    }
 }
