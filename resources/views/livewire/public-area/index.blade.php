@@ -544,7 +544,7 @@
                             <div class="box">
                                 {{-- <img src="{{ asset('img/cover-not-found.jpg') }}" class="card-img-top rounded mx-auto d-block" draggable="false"> --}}
                                 <img src="{{ $item->cover != null ? asset('storage/'. $item->cover) : asset('img/cover-not-found.jpg') }}" class="card-img-top rounded mx-auto d-block" draggable="false">
-                                <h3 class="mt-3">{{ $item->kode_buku }} <sup class="badge rounded-pill {{ $item->status == 'in stock' ? 'bg-success' : 'bg-danger' }} fw-lighter fst-italic">{{
+                                <h3 class="mt-3">{{ $item->ddc_number }} <sup class="badge rounded-pill {{ $item->status == 'in stock' ? 'bg-success' : 'bg-danger' }} fw-lighter fst-italic">{{
                                     $item->status }}</sup></h3>
                                 <h5 class="mt-0">{{ $item->judul }}
                                     <p class="fs-6 fst-italic text-muted">{{ $item->pengarang }}</p>

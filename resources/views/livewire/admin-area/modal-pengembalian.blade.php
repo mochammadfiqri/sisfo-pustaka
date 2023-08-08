@@ -22,7 +22,7 @@
                         <div wire:ignore class="input-group input-group-outline mt-3">
                             <select wire:model='book_id' class="form-control">
                                 <option selected>Pilih Buku...</option>
-                                @foreach ($books as $item)
+                                    @foreach ($books as $item)
                                 <option value="{{ $item->id }}">{{ $item->judul }}</option>
                                 @endforeach
                             </select>

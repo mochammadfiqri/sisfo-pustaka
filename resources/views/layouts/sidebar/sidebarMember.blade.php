@@ -51,14 +51,14 @@
                     <span class="nav-link-text ms-2 ps-1">Daftar Buku</span>
                 </a>
             </li>
-            {{-- <li class="nav-item">
-                <a href="/peminjaman_buku_anggota" class="nav-link text-white" aria-controls="dashboardsExamples"
+            <li class="nav-item">
+                <a href="#" class="nav-link text-white" aria-controls="ddc_list"
                     role="button" aria-expanded="false">
                     <i class="material-icons-round opacity-10">credit_score</i>
-                    <span class="nav-link-text ms-2 ps-1">Peminjaman Buku</span>
+                    <span class="nav-link-text ms-2 ps-1">DDC List</span>
                 </a>
             </li>
-            <li class="nav-item">
+            {{-- <li class="nav-item">
                 <a href="/pengembalian_buku_anggota" class="nav-link text-white" aria-controls="dashboardsExamples"
                     role="button" aria-expanded="false">
                     <i class="material-icons-round opacity-10">assignment_return</i>

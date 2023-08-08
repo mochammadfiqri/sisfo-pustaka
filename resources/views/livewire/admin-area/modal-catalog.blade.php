@@ -11,22 +11,22 @@
             </div>
             <form wire:submit.prevent="createBooks" enctype="multipart/form-data">
                 <div class="modal-body">
-                    <div class="input-group input-group-outline mt-0 mb-3 @if ($errors->has('kode_buku')) is-filled is-invalid @elseif ($kode_buku) is-filled is-valid @endif">
-                        <label class="form-label">Kode Buku</label>
-                        <input wire:model="kode_buku" type="text" class="form-control" oninput="checkInput(this)" onfocus="focused(this)"
-                            onfocusout="defocused(this)" data-gtm-form-interact-field-id="3">
+                    {{-- selectUser : {{ var_export($ddc_id) }} --}}
+                    <div wire:ignore class="input-group input-group-outline mt-1">
+                        <select wire:model='ddc_id' class="form-control">
+                            <option selected>Pilih Klasifikasi</option>
+                                @foreach ($ddcCategory as $item)
+                            <option value="{{ $item->id }}">{{ $item->ddc_number }} - {{ $item->name }}</option>
+                            @endforeach
+                        </select>
                     </div>
                     <div class="input-group input-group-outline my-3 @if ($errors->has('judul')) is-filled is-invalid @elseif ($judul) is-filled is-valid @endif">
                         <label class="form-label">Judul Buku</label>
                         <input wire:model="judul" type="text" class="form-control" oninput="checkInput(this)" onfocus="focused(this)"
                             onfocusout="defocused(this)" data-gtm-form-interact-field-id="3">
                     </div>
+                    {{-- selectUser : {{ var_export($categories) }} --}}
                     <div wire:ignore class="input-group input-group-outline mt-3">
-                        {{-- <select wire:ignore wire:model='categories' data-placeholder="Pilih Kategori..." class="form-control selectpicker" data-live-search="true" multiple>
-                            @foreach ($kategori as $item)
-                                <option value="{{ $item->id }}">{{ $item->name }}</option>
-                            @endforeach
-                        </select> --}}
                         <select wire:model='categories' data-placeholder="Pilih Kategori..." class="form-control" multiple>
                             @foreach ($kategori as $item)
                                 <option value="{{ $item->id }}">{{ $item->name }}</option>
@@ -158,11 +158,19 @@
             </div>
             <form wire:submit.prevent="updateBooks" enctype="multipart/form-data">
                 <div class="modal-body">
-                    <div
-                        class="input-group input-group-outline mt-0 mb-3 mb-lg-3 mb-md-3 @if ($errors->has('kode_buku')) is-filled is-invalid @elseif ($kode_buku) is-filled is-valid @endif">
+                    {{-- <div
+                        class="input-group input-group-outline mt-0 mb-3 mb-lg-3 mb-md-3 @if ($errors->has('ddc_number')) is-filled is-invalid @elseif ($ddc_number) is-filled is-valid @endif">
                         <label class="form-label">Kode Buku</label>
-                        <input wire:model="kode_buku" type="text" class="form-control" oninput="checkInput(this)" onfocus="focused(this)"
+                        <input wire:model="ddc_number" type="text" class="form-control" oninput="checkInput(this)" onfocus="focused(this)"
                             onfocusout="defocused(this)" data-gtm-form-interact-field-id="3">
+                    </div> --}}
+                    <div wire:ignore class="input-group input-group-outline mt-3">
+                        <select wire:model='ddc_id' class="form-control">
+                            <option selected>Pilih Klasifikasi</option>
+                            @foreach ($ddcCategory as $item)
+                                <option value="{{ $item->id }}">{{ $item->ddc_number }} - {{ $item->name }}</option>
+                            @endforeach
+                        </select>
                     </div>
                     <div
                         class="input-group input-group-outline my-3 @if ($errors->has('judul')) is-filled is-invalid @elseif ($judul) is-filled is-valid @endif">
@@ -315,7 +323,7 @@
 </div>
 
 <!-- Modal Cetak Laporan Buku -->
-<div wire:ignore.self class="modal fade" id="printReport" data-bs-backdrop="static" data-bs-keyboard="false"
+{{-- <div wire:ignore.self class="modal fade" id="printReport" data-bs-backdrop="static" data-bs-keyboard="false"
     tabindex="-1" aria-labelledby="printReportLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -327,7 +335,6 @@
             </div>
             <form wire:submit.prevent="printReport">
                 <div class="modal-body">
-                    {{-- filterStatus : {{ var_export($filterStatus) }} --}}
                     <div class="input-group input-group-outline mt-0 w-100">
                         <div class="dropdown w-100">
                             <button class="btn btn-sm btn-outline-secondary w-100 dropdown-toggle" type="button"
@@ -340,11 +347,10 @@
                                 <div class="row row-cols-2 mx-auto mb-3">
                                     <li class="form-check ms-n3">
                                         <input wire:model="filterStatus" class="form-check-input" type="checkbox" value="in stock">
-                                            {{-- <input name="filterStatus[]" class="form-check-input" type="checkbox" value="in stock"> --}}
+                                            
                                         <label class="custom-control-label" for="customCheck1">InStock</label>
                                     </li>
                                     <li class="form-check ms-n3">
-                                        {{-- <input wire:model="filterStatus" class="form-check-input" type="checkbox" value="not available"> --}}
                                         <input name="filterStatus[]" class="form-check-input" type="checkbox" value="not available">
                                         <label class="custom-control-label" for="customCheck1">Not Available</label>
                                     </li>
@@ -352,7 +358,6 @@
                         </div>
                     </div>
                     <hr class="horizontal light mt-0 mb-2">
-                    {{-- filterCategory : {{ var_export($filterCategory) }} --}}
                     <div class="input-group input-group-outline mt-0 w-100">
                         <div class="dropdown w-100">
                             <button class="btn btn-sm btn-outline-secondary w-100 dropdown-toggle" type="button"
@@ -366,7 +371,6 @@
                                     @foreach ($kategori as $item)
                                     <li class="form-check ms-n3">
                                         <input wire:model="filterCategory" class="form-check-input" type="checkbox" value="{{ $item->id }}">
-                                        {{-- <input name="filterCategory[]" class="form-check-input" type="checkbox" value="{{ $item->id }}"> --}}
                                         <label class="custom-control-label" for="customCheck1">{{ $item->name }}</label>
                                     </li>
                                     @endforeach
@@ -383,4 +387,4 @@
             </form>
         </div>
     </div>
-</div>
+</div> --}}

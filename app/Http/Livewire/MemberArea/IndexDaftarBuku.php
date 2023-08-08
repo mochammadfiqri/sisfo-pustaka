@@ -28,7 +28,15 @@ class IndexDaftarBuku extends Component
             $books->where(function ($query) {
                 $query
                 ->where('judul', 'like', '%' . $this->search . '%')
-                ->orWhere('pengarang', 'like', '%' . $this->search . '%');
+                ->orWhere('penerbit', 'like', '%' . $this->search . '%')
+                ->orWhere('pengarang', 'like', '%' . $this->search . '%')
+                ->orWhereHas('categories', function ($query) {
+                    $query->where('name', 'like', '%' . $this->search . '%');
+                })
+                ->orWhereHas('DDCcategories', function ($query) {
+                    $query->where('name', 'like', '%' . $this->search . '%')
+                        ->orWhere('ddc_number', 'like', '%' . $this->search . '%');
+                });
             });
         }
 

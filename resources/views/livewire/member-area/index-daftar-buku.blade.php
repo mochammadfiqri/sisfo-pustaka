@@ -1,5 +1,5 @@
 <div class="row">
-    {{-- @include('livewire.admin-area.modal-catalog') --}}
+    @include('sweetalert::alert')
     <div class="col-12">
         <div class="card my-2">
             <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
@@ -37,7 +37,7 @@
                     </div>
                     <div class="col col-lg-3 float-end me-3">
                         <div class="input-group input-group-outline">
-                            <input wire:model="search" type="text" class="form-control" placeholder="Cari Judul atau Pengarang disini...">
+                            <input wire:model="search" type="text" class="form-control" placeholder="Cari Buku...">
                         </div>
                     </div>
                 </div>

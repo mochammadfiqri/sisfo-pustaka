@@ -5,6 +5,7 @@ namespace App\Http\Livewire\AdminArea;
 use App\Models\Book;
 use Livewire\Component;
 use App\Models\Category;
+use App\Models\DDCcategory;
 use Livewire\WithPagination;
 use Livewire\WithFileUploads;
 
@@ -13,7 +14,7 @@ class IndexCatalog extends Component
     use WithPagination;
     use WithFileUploads;
     protected $paginationTheme = 'bootstrap';
-    public $kode_buku, $judul, $cover, $jilid, $cetakan, $edisi, $kata_kunci, $bahasa, $isbn_issn,
+    public $ddc_id, $judul, $cover, $jilid, $cetakan, $edisi, $kata_kunci, $bahasa, $isbn_issn,
         $halaman, $tahun_terbit, $kota_terbit, $penerbit, $pengarang, $abstrak, $url, $file, $books_id;
     public $currentCategories;
     public $categories = [];
@@ -25,7 +26,7 @@ class IndexCatalog extends Component
     protected function rules()
     {
         return [
-            'kode_buku' => 'required|unique:books,kode_buku,' . $this->books_id,
+            // 'ddc_id' => 'required|unique:books,ddc_id,' . $this->books_id,
             'judul' => 'required',
             'jilid' => 'nullable',
             'cetakan' => 'nullable',
@@ -49,7 +50,7 @@ class IndexCatalog extends Component
         'cover.max' => 'Ukuran Foto maksimal 1 MB',
         'file.max' => 'Ukuran Foto maksimal 2 MB',
         'judul.required' => 'Judul tidak boleh kosong',
-        'kode_buku.required' => 'Kode Buku tidak boleh kosong'
+        // 'ddc_id.required' => 'Kode Buku tidak boleh kosong'
     ];
 
     public function updated($fields)
@@ -75,7 +76,7 @@ class IndexCatalog extends Component
         }
 
         $book = Book::create([
-        'kode_buku'    => $this->kode_buku,
+        // 'ddc_id'       => $this->ddc_id,
         'judul'        => $this->judul,
         'jilid'        => $this->jilid,
         'cetakan'      => $this->cetakan,
@@ -94,6 +95,7 @@ class IndexCatalog extends Component
         'cover'        => $pathCover,
         ]);
         $book->categories()->sync($this->categories);
+        $book->DDCcategories()->sync($this->ddc_id);
 
         $this->resetInput();
         $this->dispatchBrowserEvent('close-modal', ['message' => 'Buku berhasil ditambahkan!']);
@@ -117,7 +119,7 @@ class IndexCatalog extends Component
         $validatedData = $this->validate();
         $book = Book::findOrFail($this->books_id);
         $book->update([
-            'kode_buku' => $validatedData['kode_buku'],
+            // 'ddc_id' => $validatedData['ddc_id'],
             'judul' => $validatedData['judul'],
             'jilid' => $validatedData['jilid'],
             'cetakan' => $validatedData['cetakan'],
@@ -140,6 +142,10 @@ class IndexCatalog extends Component
             $book->categories()->sync($this->categories);
         }
 
+        if ($this->ddc_id) {
+            $book->DDCcategories()->sync($this->ddc_id);
+        }
+
         $this->resetInput();
         $this->dispatchBrowserEvent('close-modal', ['message' => 'Buku berhasil diupdate!']);
     }
@@ -149,8 +155,10 @@ class IndexCatalog extends Component
         $editBooks = Book::find($books_id);
         if ($editBooks) {
             $this->books_id     = $editBooks->id;
-            $this->kode_buku    = $editBooks->kode_buku;
+            // $this->ddc_id       = $editBooks->ddc_id;
+            $this->ddc_id       = $editBooks->DDCcategories->pluck('id')->toArray(); // Ambil ID kategori DDC terkait dari relasi
             $this->judul        = $editBooks->judul;
+            $this->categories   = $editBooks->categories->pluck('id')->toArray(); // Ambil ID kategori DDC terkait dari relasi
             $this->cover        = $editBooks->cover;
             $this->jilid        = $editBooks->jilid;
             $this->cetakan      = $editBooks->cetakan;
@@ -194,7 +202,7 @@ class IndexCatalog extends Component
 
     private function resetInput()
     {
-        $this->kode_buku = '';
+        $this->ddc_id = '';
         $this->judul = '';
         $this->cover = '';
         $this->jilid = '';
@@ -219,17 +227,35 @@ class IndexCatalog extends Component
         $this->resetInput();
     }
 
+    public function updatedSelectedValue()
+    {
+        $this->emit('refreshSelect2');
+    }
+
     public function render()
     {
         $books = $this->search === null ?
             Book::latest()->paginate($this->paginate) :
-            Book::latest()->where('judul', 'like', '%' . $this->search . '%')->paginate($this->paginate);
+            Book::latest()
+                ->where('judul', 'like', '%' . $this->search . '%')
+                ->orWhere('penerbit', 'like', '%' . $this->search . '%')
+                ->orWhere('pengarang', 'like', '%' . $this->search . '%')
+                ->orWhereHas('categories', function ($query) {
+                    $query->where('name', 'like', '%' . $this->search . '%');
+                })
+                ->orWhereHas('DDCcategories', function ($query) {
+                    $query->where('name', 'like', '%' . $this->search . '%')
+                        ->orWhere('ddc_number', 'like', '%' . $this->search . '%');
+                })
+                ->paginate($this->paginate);
 
         $kategori = Category::all();
+        $ddcCategory = DDCcategory::all();
 
         return view('livewire.admin-area.index-catalog', [
             'books'    => $books,
             'kategori' => $kategori,
+            'ddcCategory' => $ddcCategory,
         ]);
     }
 }

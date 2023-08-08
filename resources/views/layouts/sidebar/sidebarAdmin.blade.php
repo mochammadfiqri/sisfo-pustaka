@@ -59,6 +59,36 @@
                 </a>
             </li>
             <li class="nav-item">
+                <a href="/e-ddc" class="nav-link text-white {{ request()->routeIs('e-ddc') ? 'active' : '' }}"
+                    aria-controls="kategoriExamples" role="button" aria-expanded="false">
+                    <i class="material-icons-round opacity-10">library_books</i>
+                    <span class="nav-link-text ms-2 ps-1">Klasifikasi DDC</span>
+                </a>
+            </li>
+            {{-- <li class="nav-item">
+                <a data-bs-toggle="collapse" href="#ClassDDC" class="nav-link text-white"
+                    aria-controls="ClassDDC" role="button" aria-expanded="false">
+                    <i class="material-icons-round opacity-10">library_books</i>
+                    <span class="nav-link-text ms-2 ps-1">Klasifikasi DDC</span>
+                </a>
+                <div class="collapse" id="ClassDDC">
+                    <ul class="nav ">
+                        <li class="nav-item active">
+                            <a href="/e-ddc" class="nav-link text-white active {{ request()->routeIs('ddcCategory') ? 'active' : '' }}">
+                                <i class="material-icons-round opacity-10">post_add</i>
+                                <span class="nav-link-text ms-2 ps-1">Tambah Klasifikasi</span>
+                            </a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link text-white active" href="#">
+                                <i class="material-icons-round opacity-10">format_list_bulleted</i>
+                                <span class="nav-link-text ms-2 ps-1">Daftar Klasifikasi</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li> --}}
+            <li class="nav-item">
                 <a href="/peminjaman_buku" class="nav-link text-white {{ request()->routeIs('peminjamanBuku') ? 'active' : '' }}" aria-controls="dashboardsExamples"
                     role="button" aria-expanded="false">
                     <i class="material-icons-round opacity-10">credit_score</i>
@@ -97,12 +127,12 @@
                 </a>
             </li> --}}
             <li class="nav-item">
-                <a data-bs-toggle="collapse" href="#dashboardsExamples" class="nav-link text-white"
-                    aria-controls="dashboardsExamples" role="button" aria-expanded="false">
+                <a data-bs-toggle="collapse" href="#setting" class="nav-link text-white"
+                    aria-controls="setting" role="button" aria-expanded="false">
                     <i class="material-icons-round opacity-10">settings</i>
                     <span class="nav-link-text ms-2 ps-1">Pengatruan</span>
                 </a>
-                <div class="collapse" id="dashboardsExamples">
+                <div class="collapse" id="setting">
                     <ul class="nav ">
                         <li class="nav-item active">
                             <a class="nav-link text-white active" href="/setting_akun">
@@ -110,12 +140,6 @@
                                 <span class="nav-link-text ms-2 ps-1">Manage Account</span>
                             </a>
                         </li>
-                        {{-- <li class="nav-item active">
-                            <a class="nav-link text-white active" href="../../pages/dashboards/analytics.html">
-                                <i class="material-icons-round opacity-10">settings_applications</i>
-                                <span class="nav-link-text ms-2 ps-1">Kelola Data<br> Perpustakaan</span>
-                            </a>
-                        </li> --}}
                     </ul>
                 </div>
             </li>

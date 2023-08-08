@@ -15,6 +15,7 @@ class DetailController extends Controller
         $user->save();
         return redirect('/users')->with('toast_success', 'Yeayy, Approval Berhasil !');
     }
+    
     public function index($id)
     {
         $user = User::find($id);

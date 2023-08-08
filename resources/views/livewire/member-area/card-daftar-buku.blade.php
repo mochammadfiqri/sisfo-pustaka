@@ -1,4 +1,5 @@
 <div class="row ms-auto ms-lg-4 ms-md-3 ms-sm-auto">
+    @include('sweetalert::alert')
     @foreach ($books as $item)
         <div class="col-12 col-lg-3 col-md-4 col-sm-8 mb-5 mb-lg-5 me-n6 me-lg-1 me-md-n1 me-sm-n4 ms-n2">
             <div class="card mt-4 h-100" data-animation="true">
@@ -13,7 +14,7 @@
                 </div>
                 <div class="card-body text-center mx-1">
                     <div class="d-flex mt-n6">
-                        <a href="#" type="button" class="btn btn-outline-info btn-sm mx-auto w-lg-100 w-md-100 w-60">
+                        <a href="daftar_buku/detail/{{ $item->id }}" type="button" class="btn btn-outline-info btn-sm mx-auto w-lg-100 w-md-100 w-60">
                             View Detail
                         </a>
                     </div>
@@ -25,9 +26,13 @@
                     <p class="text-xs mb-0">
                         {{ $item->abstrak }}
                     </p>
+                    {{-- <p class="text-xs my-autp">No. Klasifikasi : <br> 001</p> --}}
                 </div>
                 <hr class="dark horizontal my-0">
                 <div class="card-footer d-flex">
+                    @foreach ($item->DDCcategories as $category)
+                    <p class="text-xs my-auto">No. Klasifikasi : <br> {{ $category->ddc_number }}</p>
+                    @endforeach
                     <i class="material-icons position-relative ms-auto text-lg me-1 my-auto">inventory_2</i>
                     <p class="text-xs my-auto {{ $item->status == 'in stock' ? 'text-success' : 'text-danger' }} fw-lighter fst-italic"> 
                     {{ $item->status }}</p>

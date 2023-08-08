@@ -5,7 +5,7 @@
 
 @section('content')
 <div class="row">
-    @include('sweetalert::alert')
+    {{-- @include('sweetalert::alert') --}}
     <div class="col-12 mb-xl-0 mb-4">
         <div class="card">
             <div class="card-header p-3 pt-2">

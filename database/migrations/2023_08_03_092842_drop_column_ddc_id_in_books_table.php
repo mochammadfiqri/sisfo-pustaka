@@ -13,10 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->string('email')->after('id');
-            $table->timestamp('email_verified_at')->nullable()->after('username');
-            $table->rememberToken()->after('password');
+        Schema::table('books', function (Blueprint $table) {
+            $table->dropColumn('ddc_id');
         });
     }
 
@@ -27,9 +25,9 @@ return new class extends Migration
      */
     public function down()
     {
-        // Schema::table('users', function (Blueprint $table) {
-        //     //
-        // });
-        Schema::dropIfExists('users');
+        Schema::table('books', function (Blueprint $table) {
+            $table->string('ddc_id'); // Ubah kembali kolom 'ddc_id' menjadi 'kode_buku'
+
+        });
     }
 };

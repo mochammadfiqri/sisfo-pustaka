@@ -6,12 +6,12 @@
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
   <title>SISFO-PUSTAKA</title>
-  <meta content="" name="description">
-  <meta content="" name="keywords">
+  <meta content="Sistem Informasi Perpustakaan" name="description">
+  <meta content="perpustakaan" name="keywords">
 
   <!-- Favicons -->
-  <link href="assets/img/favicon.png" rel="icon">
-  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+  <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('img/apple-icon.png') }}">
+  <link rel="icon" type="image/png" href="{{ asset('img/favicon.png') }}">
 
   <!-- Google Fonts -->
   <link
@@ -29,14 +29,6 @@
 
   <!-- Template Main CSS File -->
   <link href="{{ asset('css/arsha/style.css') }}" rel="stylesheet">
-
-  <!-- =======================================================
-  * Template Name: Arsha
-  * Updated: May 30 2023 with Bootstrap v5.3.0
-  * Template URL: https://bootstrapmade.com/arsha-free-bootstrap-html-template-corporate/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
 </head>
 
 <body>

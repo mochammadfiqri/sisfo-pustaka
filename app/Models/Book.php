@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Category;
+use App\Models\DDCcategory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -13,7 +14,7 @@ class Book extends Model
 
     protected $table = 'books';
     protected $fillable = [
-        'kode_buku',
+        // 'ddc_number',
         'judul',
         'cover',
         'jilid',
@@ -37,8 +38,14 @@ class Book extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
+
     public function categories(): BelongsToMany
     {
         return $this->belongsToMany(Category::class, 'book_category', 'book_id', 'category_id');
+    }
+
+    public function DDCcategories(): BelongsToMany
+    {
+        return $this->belongsToMany(DDCcategory::class, 'ddc_category', 'book_id', 'ddc_id');
     }
 }

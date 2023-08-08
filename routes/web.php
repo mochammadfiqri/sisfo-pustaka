@@ -17,6 +17,7 @@ use App\Http\Controllers\BookRentController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\BookReturnController;
+use App\Http\Controllers\DDCcategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -74,11 +75,16 @@ Route::middleware('auth')->group(function() {
         Route::get('user-approve/{id}', [DetailController::class, 'userApprove']);
 
         Route::get('/profile_admin', [ProfileController::class, 'indexAdmin'])->name('profileAdmin');
+
+        Route::get('/e-ddc', [DDCcategoryController::class, 'index'])->name('e-ddc');
     });
     
     Route::middleware('only_member')->group(function() {
         Route::get('/dashboard/{username}', [MemberController::class, 'dashboard'])->name('dashboardMember');
-        Route::get('/daftar_buku', [MemberController::class, 'bookList'])->name('daftarbuku');
-        
+        // Route::get('/daftar_buku', [MemberController::class, 'bookList'])->name('bookList');
+        Route::get('/daftar_buku', [MemberController::class, 'index'])->name('bookList');
+        Route::get('/daftar_buku/detail/{id}', [MemberController::class, 'detailBook'])->name('detailBook');
+        Route::post('/daftar_buku/detail/{id}/rent', [MemberController::class, 'approveBook'])->name('approveBook');
+        Route::post('/daftar_buku/detail/{id}/return', [MemberController::class, 'returnBook'])->name('returnBook');
     });
 });

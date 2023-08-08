@@ -24,6 +24,14 @@ class CatalogController extends Controller
         ]);
     }
 
+    // public function detailBook($id)
+    // {
+    //     $book = Book::find($id);
+    //     return view('memberArea.detailBook', [
+    //         'books' => $book
+    //     ]);
+    // }
+
     public function printReport() {
         $books = Book::with('categories')->get();
         return Excel::download(new BooksExport($books), 'rekap_buku_' . Carbon::now()->timestamp . '.xlsx');
