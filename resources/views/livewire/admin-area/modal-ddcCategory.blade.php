@@ -54,9 +54,11 @@
                     <div wire:ignore class="input-group input-group-outline mt-0 mb-3">
                         <select wire:model='parent_id' class="form-control">
                             <option selected>Pilih Induk...</option>
-                            {{-- @foreach ($users as $item)
-                                <option value="{{ $item->id }}">{{ $item->username }}</option>
-                            @endforeach --}}
+                            @foreach ($ddcCategory as $item)
+                                @if ($item->parent_id === null)
+                                    <option value="{{ $item->id }}">{{ $item->ddc_number }} - {{ $item->name }}</option>
+                                @endif
+                            @endforeach
                         </select>
                     </div>
                     <div

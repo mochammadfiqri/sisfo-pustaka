@@ -86,5 +86,6 @@ Route::middleware('auth')->group(function() {
         Route::get('/daftar_buku/detail/{id}', [MemberController::class, 'detailBook'])->name('detailBook');
         Route::post('/daftar_buku/detail/{id}/rent', [MemberController::class, 'approveBook'])->name('approveBook');
         Route::post('/daftar_buku/detail/{id}/return', [MemberController::class, 'returnBook'])->name('returnBook');
+        // Route::get('/pdf/{filename}', [MemberController::class, 'showPDF'])->name('pdf.show');
     });
 });

@@ -6,8 +6,10 @@ use Carbon\Carbon;
 use App\Models\Book;
 use App\Models\RentLogs;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class MemberController extends Controller
 {   
@@ -16,6 +18,26 @@ class MemberController extends Controller
     public function index() 
     {
         return view('memberArea.daftarbuku');
+    }
+
+    public function showPDF($filename)
+    {
+        // $path = 'pdf/' . $filename;
+        // $file = Storage::disk('public')->get($path);
+        // $response = new Response($file, 200);
+        // $response->header('Content-Type', 'application/pdf');
+        // return $response;
+
+        // $path = 'public' . $filename . '.pdf'; // Sesuaikan dengan path dan ekstensi file yang tepat
+        // $file = Storage::get($path);
+
+        // if (!$file) {
+        //     abort(404);
+        // }
+
+        // $response = new Response($file, 200);
+        // $response->header('Content-Type', 'application/pdf');
+        // return $response;
     }
 
     public function approveBook($id) {

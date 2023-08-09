@@ -503,11 +503,37 @@
                     </div>
                 </div>
             </div>
+            <div class="row">
+                <h5 class="fw-bold fs-lg fs-md text-md-10 ms-2 mt-4 mb-3">Files</h5>
+                <div class="ms-2 pt-0">
+                    <div class="row">
+                        <div class="col-12">
+                            {{-- <a href="{{ route('pdf.show', ['filename' => $books->file]) }}" target="_blank" title="{{ $books->file }}">Tampilkan PDF</a> --}}
+                            <a href="{{ asset('storage/'.$books->file) }}" target="_blank">
+                                <i class="fas fa-file-pdf"></i> Baca Buku 
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 @endsection
 
 @push('addonsScript')
+{{-- <script>
+    PSPDFKit.load({
+		container: "#pspdfkit",
+  		document: "document.pdf" // Add the path to your document here.
+	})
+	.then(function(instance) {
+		console.log("PSPDFKit loaded", instance);
+	})
+	.catch(function(error) {
+		console.error(error.message);
+	});
+</script>
+<script src="assets/pspdfkit.js"></script> --}}
 <script>
     document.addEventListener("DOMContentLoaded", function() {
         let borrowLinks = document.querySelectorAll(".borrow-link");

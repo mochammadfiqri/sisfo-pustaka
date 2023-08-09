@@ -8,12 +8,12 @@
                     <h6 class="text-white text-uppercase ps-3">
                         History Pengembalian Buku
                         <!-- Button trigger modal -->
-                        <button type="button" class="btn bg-gradient-success btn-sm float-end me-1"
+                        {{-- <button type="button" class="btn bg-gradient-success btn-sm float-end me-1"
                             data-bs-toggle="modal" data-bs-target="#apporveBookReturn" data-te-ripple-init
                             data-te-ripple-color="light">
                             <span>Approve Pengembalian</span>
                             <span class="badge badge-xs badge-circle border border-1 ms-1">4</span>
-                        </button>
+                        </button> --}}
                         <button type="button" class="btn bg-gradient-success btn-sm float-end me-1"
                             data-bs-toggle="modal" data-bs-target="#addbookreturn" data-te-ripple-init
                             data-te-ripple-color="light">

@@ -6,8 +6,10 @@ use App\Models\Book;
 use Livewire\Component;
 use App\Models\Category;
 use App\Models\DDCcategory;
+use App\Models\RentLogs;
 use Livewire\WithPagination;
 use Livewire\WithFileUploads;
+use Illuminate\Support\Facades\Storage;
 
 class IndexCatalog extends Component
 {
@@ -118,7 +120,25 @@ class IndexCatalog extends Component
 
         $validatedData = $this->validate();
         $book = Book::findOrFail($this->books_id);
-        $book->update([
+        // $book->update([
+        //     // 'ddc_id' => $validatedData['ddc_id'],
+        //     'judul' => $validatedData['judul'],
+        //     'jilid' => $validatedData['jilid'],
+        //     'cetakan' => $validatedData['cetakan'],
+        //     'edisi' => $validatedData['edisi'],
+        //     'kata_kunci' => $validatedData['kata_kunci'],
+        //     'bahasa' => $validatedData['bahasa'],
+        //     'isbn_issn' => $validatedData['isbn_issn'],
+        //     'halaman' => $validatedData['halaman'],
+        //     'tahun_terbit' => $validatedData['tahun_terbit'],
+        //     'kota_terbit' => $validatedData['kota_terbit'],
+        //     'penerbit' => $validatedData['penerbit'],
+        //     'pengarang' => $validatedData['pengarang'],
+        //     'abstrak' => $validatedData['abstrak'],
+        //     'url' => $validatedData['url'],
+        // ]);
+
+        $updateData = [
             // 'ddc_id' => $validatedData['ddc_id'],
             'judul' => $validatedData['judul'],
             'jilid' => $validatedData['jilid'],
@@ -134,9 +154,17 @@ class IndexCatalog extends Component
             'pengarang' => $validatedData['pengarang'],
             'abstrak' => $validatedData['abstrak'],
             'url' => $validatedData['url'],
-            $pathCover => $validatedData['cover'],
-            $pathFile => $validatedData['file']
-        ]);
+        ];
+
+        if ($pathCover) {
+            $updateData['cover'] = $pathCover;
+        }
+
+        if ($pathFile) {
+            $updateData['file'] = $pathFile;
+        }
+
+        $book->update($updateData);
 
         if ($this->categories) {
             $book->categories()->sync($this->categories);
@@ -174,6 +202,10 @@ class IndexCatalog extends Component
             $this->abstrak      = $editBooks->abstrak;
             $this->url          = $editBooks->url;
             $this->file         = $editBooks->file;
+
+            // Menambahkan informasi nama cover dan file
+            $this->cover    = pathinfo($this->cover)['filename'];
+            $this->file     = pathinfo($this->file)['filename'];
         }else {
             return redirect()->to('/e-catalog');
         }
@@ -189,13 +221,25 @@ class IndexCatalog extends Component
     {
         $book = Book::find($this->books_id);
 
-        // Hapus terlebih dahulu semua data yang memiliki ketergantungan pada tabel "book_category"
+        // Hapus relasi dengan tabel rent_logs 
+        // $book->rentLogs()->delete();
+        RentLogs::where('book_id', $book->id)->delete();
+
+        // Menghapus gambar file dan cover jika ada
+        if ($book->file) {
+            Storage::delete($book->file);
+        }
+        if ($book->cover) {
+            Storage::delete($book->cover);
+        }
+        
+        // Menghapus relasi dengan kategori dan DDC categories
         $book->categories()->detach();
+        $book->DDCcategories()->detach();
 
         // Hapus data dalam tabel "books"
         $book->delete();
 
-        $this->resetInput();
         $this->dispatchBrowserEvent('close-modal', ['message' => 'Buku berhasil dihapus!']);
 
     }

@@ -64,7 +64,7 @@ class IndexPengembalian extends Component
         })
             ->paginate($this->paginate); // Updated from $this->perPage to $this->paginate
         $rentLogs = RentLogs::with(['user', 'book'])
-            ->where('actual_return_date', null)
+            ->whereNotNull('actual_return_date')
             ->when($this->search, function ($query, $search) {
                 return $query->where('rent_date', 'LIKE', '%' . $search . '%')
                     ->orWhere('return_date', 'LIKE', '%' . $search . '%')
