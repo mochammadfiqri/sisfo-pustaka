@@ -20,7 +20,7 @@ class IndexPeminjaman extends Component
     public function addbookrent()
     {
         $this->rent_date = Carbon::now()->toDateString();
-        $this->return_date = Carbon::now()->addDay(3)->toDateString();
+        $this->return_date = Carbon::now()->addDay(7)->toDateString();
 
         $book = Book::findOrFail($this->book_id)->only('status');
         if ($book['status'] != 'in stock') {
